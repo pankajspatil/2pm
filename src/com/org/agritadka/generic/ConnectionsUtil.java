@@ -27,7 +27,7 @@ public class ConnectionsUtil {
 			conn = DriverManager.getConnection(connectionUrl, connectionUser,
 					connectionPassword);*/
 			
-			Context initCtx = new InitialContext();
+			/*Context initCtx = new InitialContext();
 
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
 
@@ -35,14 +35,13 @@ public class ConnectionsUtil {
 
 			envCtx.lookup("jdbc/agri_tadka");
 			
-			conn = ds.getConnection();
-			
-			/*if(conn == null){
+			conn = ds.getConnection();*/
+			if(conn == null){
 				Class.forName("com.mysql.jdbc.Driver");  
 				  
 				conn=DriverManager.getConnection(  
-				"jdbc:mysql://localhost:3306/agri_tadka_prod","root","admin");
-			}*/
+				"jdbc:mysql://localhost:3306/agri_tadka","root","admin");
+			}
 
 		} catch (Exception ex) {
 			ex.printStackTrace();

@@ -340,7 +340,7 @@ public OrderData getPrintOrderData(Integer tableId, String userId, Integer order
 		
 		if(tableId != null || orderId != null){
 		
-		query = "select o.order_id,o.order_sequence, om.order_menu_map_id , msm.main_sub_menu_map_id, sum(om.quantity) quantity, sum(om.unit_price) unit_price, "+
+		query = "select o.order_id,o.order_sequence, om.order_menu_map_id , msm.main_sub_menu_map_id, sum(om.quantity) quantity, om.unit_price unit_price, "+
 						"sum(om.order_price) order_price, sm.menu_name, om.notes, s.status_code, o.waiter_id, "+ 
 						"o.customer_name, o.mobile_number, o.customer_address, o.tax, o.advance_amt, o.discount_amt, DATE_FORMAT(o.created_on,'%d %b %Y %T') created_on "+
 						"from order_master o inner join status_master s on o.status_id = s.status_id ";
