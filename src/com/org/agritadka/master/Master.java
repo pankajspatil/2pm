@@ -249,7 +249,7 @@ public List<MenuMapper> getMenuMappings(boolean onlyActive) throws SQLException{
 		
 		String query = "SELECT ms.main_sub_menu_map_id, m.main_menu_id, s.sub_menu_id, s.menu_description, " +
 				"m.menu_name as main_menu, s.menu_name as sub_menu, s.ac_unit_price, s.non_ac_unit_price, s.is_veg, s.is_active "+
-				"FROM agri_tadka.main_sub_menu_map ms "+
+				"FROM main_sub_menu_map ms "+
 				"inner join main_menu_master m on m.main_menu_id = ms.main_menu_id and ms.is_active = 1 and m.is_active = 1 "+
 				"inner join sub_menu_master s on s.sub_menu_id = ms.sub_menu_id ";
 				if(onlyActive){
@@ -297,7 +297,7 @@ public List<MenuMapper> getAllSubMenus1(boolean onlyActive) throws SQLException{
 	
 	String query = "SELECT ms.main_sub_menu_map_id, m.main_menu_id, s.sub_menu_id, s.menu_description, " +
 			"m.menu_name as main_menu, s.menu_name as sub_menu, s.ac_unit_price, s.non_ac_unit_price, s.is_veg, s.is_active "+
-			"FROM agri_tadka.main_sub_menu_map ms "+
+			"FROM main_sub_menu_map ms "+
 			"inner join main_menu_master m on m.main_menu_id = ms.main_menu_id and ms.is_active = 1 and m.is_active = 1 "+
 			"inner join sub_menu_master s on s.sub_menu_id = ms.sub_menu_id ";
 			if(onlyActive){
@@ -429,9 +429,9 @@ public LinkedHashMap<MainMenu, List<MenuMapper>> getMenus(String priceType) thro
 					"m.menu_name as main_menu, s.menu_name as sub_menu, s."+ priceType +"_unit_price as unit_price, s.is_veg "+
 					"FROM main_menu_master m "+
 					"inner join (select * from main_menu_master mm where is_active = 1) mm on m.main_menu_id = mm.main_menu_id "+
-					"left join agri_tadka.main_sub_menu_map ms on m.main_menu_id = ms.main_menu_id and ms.is_active = 1 "+
+					"left join main_sub_menu_map ms on m.main_menu_id = ms.main_menu_id and ms.is_active = 1 "+
 					"left join (select * from sub_menu_master where is_active = 1) s on s.sub_menu_id = ms.sub_menu_id order by m.menu_name, s.menu_name";
-	//System.out.println("query==>" + query);
+	System.out.println("query==>" + query);
 	
 	ResultSet dataRS = conn.createStatement().executeQuery(query);
 	

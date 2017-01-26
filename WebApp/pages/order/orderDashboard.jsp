@@ -111,7 +111,7 @@ List<OrderData> orderList = order.getAllOrders(fromDate, toDate);
 	</table>
 
 </center>
-<script src="/AgriTadka/resources/js/order.js" type="text/javascript"></script>
+<script src="<%=contextPath%>/resources/js/order.js" type="text/javascript"></script>
 <script src="<%=contextPath%>/resources/js/reports.js" type="text/javascript"></script>
 </body>
 </html>
