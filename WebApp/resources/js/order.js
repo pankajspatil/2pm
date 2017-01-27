@@ -34,8 +34,8 @@ function addMenuToOrder(buttonObj){
 	menu.unitPrice = unitPrice;
 	menu.finalPrice = finalPrice;
 	var  notes = document.getElementById('note'+menuId).value;
-	if (notes.trim() == ''){
-		//notes = ' - ';
+	if (notes.trim() === ''){
+		notes = '-';
 	}
 	
 	menu.notes = notes;
@@ -56,15 +56,13 @@ function addMenuToOrder(buttonObj){
     var quantityCell = $("<td></td>");
     quantityCell.append(combo);
     
-    var newRow = $("<tr id='"+randomNumber+"' title='random' align='center'></tr>");
+    var notesCell = $("<td></td>");
+    notesCell.append(notes);
     
+    var newRow = $("<tr id='"+randomNumber+"' title='random' align='center'></tr>");    
     newRow.append($(clonedRow).find('td:nth-child(1)').removeAttr('width').attr("align","left"));
-    if (notes.trim() == ''){
-    	newRow.append('-');
-     }else{
-		newRow.append(notes);
-	    	
-	}
+    
+    newRow.append(notesCell);
     newRow.append(quantityCell);
     newRow.append("<td>"+unitPrice+"</td>");
     newRow.append("<td>"+finalPrice+"</td>");
@@ -124,10 +122,10 @@ function updatePrice(selectObj){
 		var quantity = $(selectObj).find("option:selected").val();
 		
 		var menu = menuList[id] === undefined ? {} : menuList[id];
-		var unitPrice = $(rowObj).find('td:nth-child(3)').text();	
+		var unitPrice = $(rowObj).find('td:nth-child(4)').text();	
 		var finalPrice = parseFloat(quantity * unitPrice);
 		
-		var existingFinalPrice = parseFloat($(rowObj).find('td:nth-child(4)').text());
+		var existingFinalPrice = parseFloat($(rowObj).find('td:nth-child(5)').text());
 		var subTotal = parseFloat($('#priceTotal').text());
 		
 		subTotal = (subTotal - existingFinalPrice) + finalPrice;
@@ -143,7 +141,7 @@ function updatePrice(selectObj){
 		menu.notes = menu.notes === undefined ? '' : menu.notes;
 		menuList[id] = menu;
 		
-		var cellObj = $(rowObj).find('td:nth-child(4)').text(finalPrice);
+		var cellObj = $(rowObj).find('td:nth-child(5)').text(finalPrice.toFixed(1));
 		$(cellObj).effect("highlight",{},3000);
 	}else if(status == 2){
 		Lobibox.alert("error",{
@@ -491,7 +489,7 @@ function deleteRecord(imgObj,randomnumber){
             		    	  
             		    	  if(resultData == 0){
             		    		  
-            		    		  var finalPrice = parseFloat($(rowObj).find('td:nth-child(4)').text());
+            		    		  var finalPrice = parseFloat($(rowObj).find('td:nth-child(5)').text());
             	            		var subTotal = parseFloat($('#priceTotal').text());
             	            		
             	            		subTotal = (subTotal - finalPrice);

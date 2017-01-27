@@ -13,7 +13,6 @@ import com.org.agritadka.generic.ConnectionsUtil;
 import com.org.agritadka.generic.Constants;
 import com.org.agritadka.generic.SendEmail;
 import com.org.agritadka.generic.Utils;
-import com.way2sms.SMS;
 
 public class Login {
 
@@ -390,7 +389,7 @@ public class Login {
 
 	public void sendSms() {
 
-		SMS smsClient = new SMS();
+		//SMS smsClient = new SMS();
 		//smsClient.send(Username, Password, Number, Message, Proxy);
 
 	}

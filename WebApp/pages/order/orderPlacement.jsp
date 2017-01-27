@@ -165,7 +165,7 @@ List<Waiter> waiterList = order.getWaiterList();
 			<table width="98%;" height="100%" border="0" align="center" id="orderedTable">
 				<tr class="headerTR">
 					<td>Menu</td>
-					<td>Note</td>
+					<td width="20%">Notes</td>
 					<td width="10%" style="border-right: thin;">Quantity</td>
 					<td width="15%">Unit Price</td>
 					<td width="15%">Total Price</td>
@@ -184,7 +184,7 @@ List<Waiter> waiterList = order.getWaiterList();
 									}
 									%>
 							<%=orderMenu.getSubMenuName() %></td>
-						<td><%=orderMenu.getNotes() %></td>
+						<td><%=orderMenu.getNotes().equals("") ? "-" : orderMenu.getNotes() %></td>
 						<td><select onChange='updatePrice(this)' onClick='setOldValue(this)'>
 							<%for(int i=1; i<=30; i++){
 								if(i == orderMenu.getQuantity()){
