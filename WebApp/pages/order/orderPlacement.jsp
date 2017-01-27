@@ -37,7 +37,7 @@
 </head>
 <body>
 <%
-
+try{
 //System.out.println("OrderId" + request.getParameter("orderId"));
 
 Integer tableId = request.getParameter("tableId") == null ? null :  Integer.parseInt(request.getParameter("tableId"));
@@ -58,7 +58,7 @@ LinkedHashMap<MainMenu, List<MenuMapper>> menuMap = order.getMenus(priceType);
 
 List<Waiter> waiterList = order.getWaiterList();
 
-System.out.println("waiter Id ==> "+ orderData.getWaiterName());
+//System.out.println("waiter Id ==> "+ orderData.getWaiterName());
 
 %>
 
@@ -294,6 +294,9 @@ System.out.println("waiter Id ==> "+ orderData.getWaiterName());
 </script>
 <!-- <div style="border: 1px solid black; width: 50%; height: 200px;display: inline-block;">Div1</div>
 <div style="border: 1px solid black;;margin-left: 52%; height: 200px;display: inline-block;">Div2</div> -->
-
+<% }catch (Exception e) {
+	e.printStackTrace();
+}
+%>
 </body>
 </html>

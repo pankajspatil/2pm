@@ -40,7 +40,7 @@ public class Order {
 		
 		String query = "SELECT ms.main_sub_menu_map_id, m.main_menu_id, s.sub_menu_id, " +
 						"m.menu_name as main_menu, s.menu_name as sub_menu, s."+ priceType +"_unit_price as unit_price, s.is_veg "+
-						"FROM agri_tadka.main_sub_menu_map ms "+
+						"FROM main_sub_menu_map ms "+
 						"inner join main_menu_master m on m.main_menu_id = ms.main_menu_id and ms.is_active = 1 and m.is_active = 1 "+
 						"inner join sub_menu_master s on s.sub_menu_id = ms.sub_menu_id and s.is_active = 1 order by m.menu_name, s.menu_name";
 		ResultSet dataRS = conn.createStatement().executeQuery(query);
@@ -138,7 +138,7 @@ public class Order {
 		
 		if(orderId == null || orderId == 0){
 			
-			String query3 = "INSERT INTO `agri_tadka`.`order_master`(`order_sequence`,`table_id`,`status_id`,`created_by`) "+
+			String query3 = "INSERT INTO `order_master`(`order_sequence`,`table_id`,`status_id`,`created_by`) "+
 					"VALUES(getNextCustomSeq(),?, (select status_id from status_master where status_code = 'INQUEUE'), ?);";
 			
 			PreparedStatement psmt3 = conn.prepareStatement(query3,
@@ -299,7 +299,7 @@ public class Order {
 		}
 		/*if(count == 0){
 			
-			query = "INSERT INTO `agri_tadka`.`order_master`(`table_id`,`status_id`,`created_by`) "+
+			query = "INSERT INTO `order_master`(`table_id`,`status_id`,`created_by`) "+
 					"VALUES(?, (select status_id from status_master where status_code = 'INQUEUE'), ?);";
 			
 			PreparedStatement psmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
