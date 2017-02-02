@@ -16,7 +16,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href="/AgriTadka/resources/css/order.css" rel="stylesheet" type="text/css">
+<link href="<%=contextPath%>/resources/css/order.css" rel="stylesheet" type="text/css">
 <style>
   #feedback { font-size: 1.4em; }
   .selectable .ui-selecting { background: #FECA40; }
@@ -74,9 +74,9 @@
 								<td align="center"><%=mainMenu.isVeg() ? "Veg" : "Non Veg" %></td>
 								<td align="center"><%=mainMenu.isActive() ? "True" : "False" %></td>
 								<td>
-									<img style="margin-left: 40%" height="22%" src="/AgriTadka/resources/images/edit.png" 
+									<img style="margin-left: 40%" height="22%" src="<%=contextPath%>/resources/images/edit.png" 
 									id="mainMenu_<%=mainMenu.getMainMenuId()%>" name="editMenu" onclick="updateMenuRecord(this)">
-									<%-- <img class="deleteIcon" src="/AgriTadka/resources/images/Delete.png" 
+									<%-- <img class="deleteIcon" src="<%=contextPath%>/resources/images/Delete.png" 
 									id="mainMenu_<%=mainMenu.getMainMenuId()%>" name="deleteMenu" onclick="deleteMenuRecord(this)"> --%>
 								</td>		
 							</tr><%
@@ -112,9 +112,9 @@
 								<td align="center"><%=subMenu.getNonAcUnitPrice() %></td>
 								<td align="center"><%=subMenu.isActive() ? "True" : "False" %></td>
 								<td>
-									<img style="margin-left: 40%" height="22%" src="/AgriTadka/resources/images/edit.png" 
+									<img style="margin-left: 40%" height="22%" src="<%=contextPath%>/resources/images/edit.png" 
 									id="subMenu_<%=subMenu.getSubMenuId()%>" name="editMenu" onclick="updateMenuRecord(this)">
-									<%-- <img class="deleteIcon" src="/AgriTadka/resources/images/Delete.png" 
+									<%-- <img class="deleteIcon" src="<%=contextPath%>/resources/images/Delete.png" 
 									id="subMenu_<%=subMenu.getSubMenuId()%>" name="deleteMenu" onclick="deleteMenuRecord(this)"> --%>
 								</td>		
 							</tr><%
@@ -153,12 +153,12 @@
 											%>
 											<li class="ui-widget-content" id='<%=mapper.getMainSubMenuId() %>_<%=mapper.getSubMenu().getSubMenuId() %>' is_veg='<%=mapper.getSubMenu().isVeg()%>'>
 												<%if(mapper.getSubMenu().isVeg()){
-													%><img class="onePaddingRight onePaddingLeft" width="2%" height="85%" alt="Veg" src="/AgriTadka/resources/images/veg-icon.png"> <%
+													%><img class="onePaddingRight onePaddingLeft" width="2%" height="85%" alt="Veg" src="<%=contextPath%>/resources/images/veg-icon.png"> <%
 												}else{
-													%><img class="onePaddingRight onePaddingLeft" width="2%" height="85%" alt="Non Veg" src="/AgriTadka/resources/images/nonveg-icon.png"><%
+													%><img class="onePaddingRight onePaddingLeft" width="2%" height="85%" alt="Non Veg" src="<%=contextPath%>/resources/images/nonveg-icon.png"><%
 												}
 												%><%=mapper.getSubMenu().getSubMenuName() %>
-												<img class="menuRightIcon" alt="Remove Sub Menu" src="/AgriTadka/resources/images/right.jpg" 
+												<img class="menuRightIcon" alt="Remove Sub Menu" src="<%=contextPath%>/resources/images/right.jpg" 
 												height="85%" width="2%" onclick="inactiveMenuMapping(this)">
 												</li>
 											<%}} %>

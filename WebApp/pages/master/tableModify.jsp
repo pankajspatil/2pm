@@ -79,7 +79,7 @@
     				psmt.addBatch();
     			}// end of for
     			psmt.executeUpdate();
-    			response.sendRedirect("/AgriTadka/pages/master/tableMaster.jsp?tableOperation=edit");
+    			response.sendRedirect("/two_pm/pages/master/tableMaster.jsp?tableOperation=edit");
     		}
     		
     	%>

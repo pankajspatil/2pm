@@ -7,8 +7,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<%
+	String contextPath = (request == null || request.getContextPath() == null) ? ""
+						: request.getContextPath();
+
+	//System.out.println("contextPath" + contextPath);
+%>
+<script>
+var contextPath = '<%=contextPath%>'; 
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" type="text/css" href="/AgriTadka/resources/css/print.css" media="print">
+<link rel="stylesheet" type="text/css" href="<%=contextPath%>/resources/css/print.css" media="print">
 <style type="text/css" media="print">
 @page {
     size: auto;   /* auto is the initial value */
@@ -29,11 +38,11 @@ if(orderId != 0){
 
 <table width="100%">
 	<tr>
-		<td align="center"><h1>Agri Tadka</h1></td>
+		<td align="center"><h1>2 PM</h1></td>
 	</tr>
 	<tr style="font-weight: bold;">
 		<td>
-			Opp. Jivadani Krupa Auto Work, Near St. Peter College,<br> Diwanman, Dongari Road, Vasai(W)
+			Sheetal, Ground floor, Near St. Peter College,<br> Diwanman, Dongari Road, Vasai(W)
 			<div style="float: right;">Mobile : 8007778851 / 52</div>
 		</td> 
 	</tr>

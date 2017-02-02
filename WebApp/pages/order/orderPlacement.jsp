@@ -15,8 +15,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href="/AgriTadka/resources/css/order.css" rel="stylesheet" type="text/css">
-<!-- <link href="/AgriTadka/resources/css/demo.css" rel="stylesheet" type="text/css"> -->
+<link href="<%=contextPath%>/resources/css/order.css" rel="stylesheet" type="text/css">
+<!-- <link href="<%=contextPath%>/resources/css/demo.css" rel="stylesheet" type="text/css"> -->
 <style>
   .custom-combobox {
     position: relative;
@@ -124,9 +124,9 @@ List<Waiter> waiterList = order.getWaiterList();
 								<tr id="<%=mapper.getMainSubMenuId()%>" align="center">
 									<td width="80%" align="left" style="">
 									<%if(mapper.getSubMenu().isVeg()){
-										%><img width="2%" height="1%" alt="Veg" src="/AgriTadka/resources/images/veg-icon.png"> <%
+										%><img width="2%" height="1%" alt="Veg" src="<%=contextPath%>/resources/images/veg-icon.png"> <%
 									}else{
-										%><img width="2%" height="1%" alt="Non Veg" src="/AgriTadka/resources/images/nonveg-icon.png"><%
+										%><img width="2%" height="1%" alt="Non Veg" src="<%=contextPath%>/resources/images/nonveg-icon.png"><%
 									}
 									%>
 									
@@ -178,9 +178,9 @@ List<Waiter> waiterList = order.getWaiterList();
 						<td align="left">
 							<input type="hidden" id="<%=orderMenu.getOrderMenuMapId()%>">
 							<%if(orderMenu.isVeg()){
-										%><img width="2%" height="1%" alt="Veg" src="/AgriTadka/resources/images/veg-icon.png"> <%
+										%><img width="2%" height="1%" alt="Veg" src="<%=contextPath%>/resources/images/veg-icon.png"> <%
 									}else{
-										%><img width="2%" height="1%" alt="Non Veg" src="/AgriTadka/resources/images/nonveg-icon.png"><%
+										%><img width="2%" height="1%" alt="Non Veg" src="<%=contextPath%>/resources/images/nonveg-icon.png"><%
 									}
 									%>
 							<%=orderMenu.getSubMenuName() %></td>
@@ -196,7 +196,7 @@ List<Waiter> waiterList = order.getWaiterList();
 						</td>
 						<td><%=orderMenu.getUnitPrice() %></td>
 						<td><%=orderMenu.getFinalPrice() %></td>
-						<td><img class="deleteIcon" src="/AgriTadka/resources/images/Delete.png" onclick="deleteRecord(this)"></td>						
+						<td><img class="deleteIcon" src="<%=contextPath%>/resources/images/Delete.png" onclick="deleteRecord(this)"></td>						
 					</tr>
 					<%
 					subTotal += orderMenu.getFinalPrice();

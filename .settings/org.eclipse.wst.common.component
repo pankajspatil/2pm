@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="AgriTadka">
+    <wb-module deploy-name="two_pm">
         <wb-resource deploy-path="/" source-path="/WebApp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/resources"/>
-        <property name="context-root" value="AgriTadka"/>
-        <property name="java-output-path" value="/AgriTadka/build/classes"/>
+        <property name="java-output-path" value="/two_pm/build/classes"/>
+        <property name="context-root" value="Two_Pm"/>
     </wb-module>
 </project-modules>

@@ -8,7 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <%@ include file="/pages/common/header.jsp"%>
-<script type="text/javascript" src="/AgriTadka/resources/js/login.js"></script>
+<script type="text/javascript" src="<%=contextPath%>/resources/js/login.js"></script>
 </head>
 <body>
 <%
@@ -87,7 +87,7 @@ if(returnValue != 1){
 <input type="hidden" name="<%=Constants.USER_ID%>" id="<%=Constants.USER_ID%>" value="<%=userId%>">
 <input type="hidden" name="rd" id="rd" value="<%=redirectPage%>">
 </form>
-<script type="text/javascript" src="/AgriTadka/resources/js/changePassword.js"></script>
+<script type="text/javascript" src="<%=contextPath%>/resources/js/changePassword.js"></script>
 <%} %>
 </body>
 </html>
