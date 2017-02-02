@@ -66,7 +66,7 @@ function addMenuToOrder(buttonObj){
     newRow.append(quantityCell);
     newRow.append("<td>"+unitPrice+"</td>");
     newRow.append("<td>"+finalPrice+"</td>");
-    newRow.append($("<img class='deleteIcon' src='/two_pm/resources/images/Delete.png' onclick='deleteRecord(this,"+randomNumber+")'>"));
+    newRow.append($("<img class='deleteIcon' src='"+contextPath+"/resources/images/Delete.png' onclick='deleteRecord(this,"+randomNumber+")'>"));
    
     //console.log(newRow);
 	
@@ -172,7 +172,7 @@ function checkIfProcessed(orderMenuMapId){
 	
 	$.ajax({
 	      type: 'POST',
-	      url: "/two_pm/pages/ajax/postAjaxData.jsp",
+	      url: contextPath + "/pages/ajax/postAjaxData.jsp",
 	      data: postData, 
 	      dataType: 'json',
 	      async : false,
@@ -230,7 +230,7 @@ function saveOrder(){
 	
 	$.ajax({
 	      type: 'POST',
-	      url: "/two_pm/pages/ajax/postAjaxData.jsp",
+	      url: contextPath + "/pages/ajax/postAjaxData.jsp",
 	      data: postData, 
 	      dataType: 'json',
 	      success: function(resultData) {
@@ -317,7 +317,7 @@ function checkoutOrder(){
 	
 	$.ajax({
 	      type: 'POST',
-	      url: "/two_pm/pages/ajax/postAjaxData.jsp",
+	      url: contextPath + "/pages/ajax/postAjaxData.jsp",
 	      data: postData, 
 	      dataType: 'json',
 	      success: function(resultData) {
@@ -332,10 +332,10 @@ function checkoutOrder(){
 	    		  Lobibox.alert("success",{
 	    				msg : 'Order cheked out successfully!!',
 	    				beforeClose: function(lobibox){
-	    					//window.open('/two_pm/pages/order/printReceipt.jsp', '_blank');
+	    					//window.open(contextPath + '/pages/order/printReceipt.jsp', '_blank');
 	    					//wait(2000);
 	    					printOrder($('#orderId').val());
-	    					window.location.href = '/two_pm';
+	    					window.location.href = contextPath;
 	    		        }
 	    			});
 	    	  }else if(resultData == 2){
@@ -369,7 +369,7 @@ function printOrder(orderId){
 	var dataMap = new Map();
 
 	dataMap.put("orderId", orderId);
-	paramsMap.put(WIN_URL, '/two_pm/pages/order/printReceipt.jsp');
+	paramsMap.put(WIN_URL, contextPath + '/pages/order/printReceipt.jsp');
 	paramsMap.put(DATA, dataMap);
 	
 	openWindow(paramsMap);
@@ -379,7 +379,7 @@ function openOrderPage(tableId, tableName, priceType, orderId){
 	
 	var form = $("<form></form>").attr('id', 'tableTransferForm')
 				.attr("name", "tableTransferForm")
-				.attr("action", "/two_pm/pages/order/orderPlacement.jsp")
+				.attr("action", contextPath + "/pages/order/orderPlacement.jsp")
 				.attr("method","post");
 	
 	if(tableId !== undefined && tableId != null){
@@ -416,6 +416,8 @@ function openOrderPage(tableId, tableName, priceType, orderId){
 		
 		form.append(orderIdObj);
 	}
+	
+	form.appendTo('body');
 	
 	form.submit();	
 }
@@ -481,7 +483,7 @@ function deleteRecord(imgObj,randomnumber){
             		
             		$.ajax({
             		      type: 'POST',
-            		      url: "/two_pm/pages/ajax/postAjaxData.jsp",
+            		      url: contextPath + "/pages/ajax/postAjaxData.jsp",
             		      data: postData, 
             		      dataType: 'json',
             		      async : false,
@@ -581,7 +583,7 @@ function cancelOrder(buttonObj){
             		
             		$.ajax({
             		      type: 'POST',
-            		      url: "/two_pm/pages/ajax/postAjaxData.jsp",
+            		      url: contextPath + "/pages/ajax/postAjaxData.jsp",
             		      data: postData, 
             		      dataType: 'json',
             		      async : false,
@@ -592,7 +594,7 @@ function cancelOrder(buttonObj){
             		    		  Lobibox.alert("success",{
             		    				msg : 'Order cancelled successfully!!',
             		    				beforeClose: function(lobibox){
-            		    		        	location.href = '/two_pm';
+            		    		        	location.href = contextPath;
             		    		        }
             		    			});
             		    		  
@@ -638,7 +640,7 @@ function updateCustomer(orderId, custName, mobile, custAddress){
 		
 		$.ajax({
 		      type: 'POST',
-		      url: "/two_pm/pages/ajax/postAjaxData.jsp",
+		      url: contextPath + "/pages/ajax/postAjaxData.jsp",
 		      data: postData, 
 		      dataType: 'json',
 		      async : false,
@@ -690,7 +692,7 @@ jQuery(function ($) {
 			$('#addCustomer').click(function(){
 				var paramMap = new Map();
 				
-				paramMap.put(URL, '/two_pm/pages/order/addCustomer.jsp?menuRequired=false&orderId=' + $("#orderId").val());
+				paramMap.put(URL, contextPath + '/pages/order/addCustomer.jsp?menuRequired=false&orderId=' + $("#orderId").val());
 				paramMap.put(WIDTH, '70%');
 				paramMap.put(HEIGHT, '80%');
 				

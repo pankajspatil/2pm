@@ -14,6 +14,7 @@
 <link rel="stylesheet" type="text/css" href="<%=contextPath%>/resources/css/materialize.css"> 
 </head>
 <body>
+<form action="post">
 	<table width="100%" align="center">
 		<tr>
 			<td width="33.33%">&nbsp;</td>
@@ -78,6 +79,7 @@ if(tableMap.size() > 0){
 <!-- <h1 align="center">Table Status<div style="float: right;border: 1px;">Text</div></h1> -->
 <script src="<%=contextPath%>/resources/js/materialize.js" type="text/javascript"></script>
 <script src="<%=contextPath%>//resources/js/order.js" type="text/javascript"></script>
+</form>
 </body>
 <%@ include file="/pages/common/footer.jsp" %>
 </html>

@@ -1,2 +1,2 @@
-# Two_PM
-This is for Two PM Restaurant
+# 2PM
+This is for 2PM Restaurant

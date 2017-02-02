@@ -36,7 +36,7 @@ function moveRow(buttonObj) {
 	
 	$.ajax({
 	      type: 'POST',
-	      url: "/two_pm/pages/ajax/postAjaxData.jsp",
+	      url: contextPath + "/pages/ajax/postAjaxData.jsp",
 	      data: postData, 
 	      dataType: 'json',
 	      success: function(resultData) {
@@ -94,7 +94,7 @@ function callback() {
 	  
 	  $.ajax({
 	      type: 'POST',
-	      url: "/two_pm/pages/ajax/postAjaxData.jsp",
+	      url: contextPath + "/pages/ajax/postAjaxData.jsp",
 	      data: postData, 
 	      dataType: 'json',
 	      success: function(resultData) {
@@ -134,9 +134,9 @@ function callback() {
 	    		  
 	    		  var menuStr = "<td>";
 	    		  if(value.isVeg){
-	    			  menuStr += "<img width='5%' height='1%' alt='Veg' src='/two_pm/resources/images/veg-icon.png'>";
+	    			  menuStr += "<img width='5%' height='1%' alt='Veg' src=' "+ contextPath + "/resources/images/veg-icon.png'>";
 		  			}else{
-		  				menuStr += "<img width='5%' height='1%' alt='Non Veg' src='/two_pm/resources/images/nonveg-icon.png'>";
+		  				menuStr += "<img width='5%' height='1%' alt='Non Veg' src=' "+ contextPath + "/resources/images/nonveg-icon.png'>";
 		  			}
 	    		  
 	    		  menuStr += value.subMenuName + "</td>";

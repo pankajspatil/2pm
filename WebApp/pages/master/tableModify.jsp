@@ -1,8 +1,10 @@
+<%@ include file="/pages/general/variables.jsp"%>
+<%@ page errorPage="/pages/common/error.jsp" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@page import="com.org.agritadka.home.Home"%>
-    <%@page import="java.sql.PreparedStatement,java.sql.ResultSet" %>
-    <%@page import="com.org.agritadka.generic.ConnectionsUtil,java.sql.Connection,java.sql.Statement"%>
+<%@page import="com.org.agritadka.home.Home"%>
+<%@page import="java.sql.PreparedStatement,java.sql.ResultSet" %>
+<%@page import="com.org.agritadka.generic.ConnectionsUtil,java.sql.Connection,java.sql.Statement"%>
     
 	<%
     		PreparedStatement psmt = null;
@@ -79,7 +81,7 @@
     				psmt.addBatch();
     			}// end of for
     			psmt.executeUpdate();
-    			response.sendRedirect("/two_pm/pages/master/tableMaster.jsp?tableOperation=edit");
+    			response.sendRedirect(contextPath + "/pages/master/tableMaster.jsp?tableOperation=edit");
     		}
     		
     	%>

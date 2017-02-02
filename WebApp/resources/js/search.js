@@ -51,7 +51,7 @@ function openPage(oepration, tableMasterId,tableName,tableType,active){
     	dataMap.put("active", active);    	
     	dataMap.put(MENU_REQUIRED,false);
     	
-    	paramsMap.put(WIN_URL, '/two_pm/pages/master/tableModify.jsp');
+    	paramsMap.put(WIN_URL, contextPath + '/pages/master/tableModify.jsp');
     	paramsMap.put(DATA, dataMap);
     	
     	openWindow(paramsMap);

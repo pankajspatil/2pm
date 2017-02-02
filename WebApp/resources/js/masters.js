@@ -48,9 +48,9 @@ function openMenuFancyBox(menuId, menuType, obj){
 	
 	var url, btnObj;
 	if(menuType == 'mainMenu'){
-		url = '/two_pm/pages/master/addFoodCategories.jsp?menuRequired=false&mainMenuId=' + menuId;
+		url = contextPath + '/pages/master/addFoodCategories.jsp?menuRequired=false&mainMenuId=' + menuId;
 	}else{
-		url = '/two_pm/pages/master/addFoodDishes.jsp?menuRequired=false&menuMapperId=' + menuId;
+		url = contextPath + '/pages/master/addFoodDishes.jsp?menuRequired=false&menuMapperId=' + menuId;
 	}
 	
 	paramMap.put(URL, url);
@@ -118,13 +118,13 @@ function updateSubMenus(divObj){
 			var isImgText = '';
 			
 			if(parseBool(value.isVeg)){
-				isImgText = '<img class="onePaddingRight onePaddingLeft" width="2%" height="85%" alt="Non Veg" src="/two_pm/resources/images/veg-icon.png">';  
+				isImgText = '<img class="onePaddingRight onePaddingLeft" width="2%" height="85%" alt="Non Veg" src="'+contextPath+'/resources/images/veg-icon.png">';  
     		  }else{
-    			 isImgText = '<img class="onePaddingRight onePaddingLeft" width="2%" height="85%" alt="Non Veg" src="/two_pm/resources/images/nonveg-icon.png">';
+    			 isImgText = '<img class="onePaddingRight onePaddingLeft" width="2%" height="85%" alt="Non Veg" src="'+contextPath+'/resources/images/nonveg-icon.png">';
     		  }
 			
 			userList.add({
-				  name: '<img alt="Add Sub Menu" src="/two_pm/resources/images/left.jpg" class="menuLeftIcon" onClick="addSubMenu(this)">' +isImgText + value.subMenuName,
+				  name: '<img alt="Add Sub Menu" src="'+contextPath+'/resources/images/left.jpg" class="menuLeftIcon" onClick="addSubMenu(this)">' +isImgText + value.subMenuName,
 				  id: value.subMenuId,
 				  is_veg: value.isVeg
 				});
@@ -156,7 +156,7 @@ function inactiveMenuMapping(imgObj){
 	
 	$.ajax({
 	      type: 'POST',
-	      url: "/two_pm/pages/ajax/postAjaxData.jsp",
+	      url: contextPath + "/pages/ajax/postAjaxData.jsp",
 	      data: postData, 
 	      dataType: 'json',
 	      success: function(resultData) {
@@ -168,13 +168,13 @@ function inactiveMenuMapping(imgObj){
 	    		  var isImgText = '';
 	  			
 	  			if(parseBool(isVeg)){
-	  				isImgText = '<img class="onePaddingRight onePaddingLeft" width="2%" height="85%" alt="Non Veg" src="/two_pm/resources/images/veg-icon.png">';  
+	  				isImgText = '<img class="onePaddingRight onePaddingLeft" width="2%" height="85%" alt="Non Veg" src="'+contextPath+'/resources/images/veg-icon.png">';  
 	      		  }else{
-	      			 isImgText = '<img class="onePaddingRight onePaddingLeft" width="2%" height="85%" alt="Non Veg" src="/two_pm/resources/images/nonveg-icon.png">';
+	      			 isImgText = '<img class="onePaddingRight onePaddingLeft" width="2%" height="85%" alt="Non Veg" src="'+contextPath+'/resources/images/nonveg-icon.png">';
 	      		  }
 	    		  
 	    		  userList.add({
-					  name: '<img alt="Add Sub Menu" src="/two_pm/resources/images/left.jpg" class="menuLeftIcon" onClick="addSubMenu(this)">' + isImgText +  subMenuName,
+					  name: '<img alt="Add Sub Menu" src="'+contextPath+'/resources/images/left.jpg" class="menuLeftIcon" onClick="addSubMenu(this)">' + isImgText +  subMenuName,
 					  id: subMenuId
 					});
 	    		  userList.update();
@@ -217,7 +217,7 @@ function addSubMenu(imgObj){
 	
 	$.ajax({
 	      type: 'POST',
-	      url: "/two_pm/pages/ajax/postAjaxData.jsp",
+	      url: contextPath + "/pages/ajax/postAjaxData.jsp",
 	      data: postData, 
 	      dataType: 'json',
 	      success: function(resultData) {
@@ -228,12 +228,12 @@ function addSubMenu(imgObj){
 	    		  var newLiObj = $('<li class="ui-widget-content" id="'+resultData+'_'+subMenuId+'"></li>');
 	    		  
 	    		  if(parseBool(itemObj.values().is_veg)){
-	    			$(newLiObj).append('<img class="onePaddingRight onePaddingLeft" width="2%" height="85%" alt="Veg" src="/two_pm/resources/images/veg-icon.png">' + subMenuName);  
+	    			$(newLiObj).append('<img class="onePaddingRight onePaddingLeft" width="2%" height="85%" alt="Veg" src="'+contextPath+'/resources/images/veg-icon.png">' + subMenuName);  
 	    		  }else{
-	    			  $(newLiObj).append('<img class="onePaddingRight onePaddingLeft" width="2%" height="85%" alt="Non Veg" src="/two_pm/resources/images/nonveg-icon.png">' + subMenuName);
+	    			  $(newLiObj).append('<img class="onePaddingRight onePaddingLeft" width="2%" height="85%" alt="Non Veg" src="'+contextPath+'/resources/images/nonveg-icon.png">' + subMenuName);
 	    		  }
 	    		  
-	    		  $(newLiObj).append('<img class="menuRightIcon" alt="Remove Sub Menu" src="/two_pm/resources/images/right.jpg" height="85%" width="2%" onclick="inactiveMenuMapping(this)">');
+	    		  $(newLiObj).append('<img class="menuRightIcon" alt="Remove Sub Menu" src="'+contextPath+'/resources/images/right.jpg" height="85%" width="2%" onclick="inactiveMenuMapping(this)">');
 	    		  
 	    		  $('#content_' + mainMenuId).append(newLiObj);
 	    		  

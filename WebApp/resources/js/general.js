@@ -104,7 +104,7 @@ function displayNotification(paramMap){
         delayIndicator: false,
         position: 'center top',
         msg: msg,
-        //img:'/two_pm/resources/images/1.png',
+        //img:contextPath + '/resources/images/1.png',
         //delay:500,
         iconSource:'fontAwesome'
     });
@@ -144,7 +144,7 @@ function validPassword(str)
 function callAjax(paramsMap){
 	
 	var methodType = paramsMap.hasKey(METHOD_TYPE) ? paramsMap.get(METHOD_TYPE) : 'POST';
-	var url = paramsMap.hasKey(URL) ? paramsMap.get(URL) : '/two_pm/pages/ajax/postAjaxData.jsp';
+	var url = paramsMap.hasKey(URL) ? paramsMap.get(URL) : contextPath + '/pages/ajax/postAjaxData.jsp';
 	var postData = paramsMap.hasKey(DATA) ? paramsMap.get(DATA) : {};
 	var dataType = paramsMap.hasKey(DATA_TYPE) ? paramsMap.get(DATA_TYPE) : 'json';
 	var successHandler = paramsMap.hasKey(SUCCESS_HANDLER) ? paramsMap.get(SUCCESS_HANDLER) : 'defaultSuccessHandler';
