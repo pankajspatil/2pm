@@ -42,8 +42,8 @@ if(orderId != 0){
 	</tr>
 	<tr style="font-weight: bold;">
 		<td>
-			Sheetal, Ground floor, Near St. Peter College,<br> Diwanman, Dongari Road, Vasai(W)
-			<div style="float: right;">Mobile : 8007778851 / 52</div>
+			Sathi Shelter,Shop no 1, Ground floor, Near St. Peter College,<br> Diwanmaan, Dongari Road, Vasai(W)
+			<div style="float: right;">Mobile : 9145698382</div>
 		</td> 
 	</tr>
 	<tr><td><hr width="100%"></td></tr>
