@@ -15,7 +15,7 @@
 </head>
 <body>
 <form action="post">
-	<table width="100%" align="center">
+	<table width="99%" align="center">
 		<tr>
 			<td width="33.33%">&nbsp;</td>
 			<td width="33.33%" align="center"><h1>Table Status</h1></td>
@@ -36,7 +36,7 @@ LinkedHashMap<String, List<Table>> tableMap = home.getTables();
 if(tableMap.size() > 0){
 	for(String tableType : tableMap.keySet()){
 		%>
-		<table width="100%" align="center">
+		<table width="99%" align="center">
 			<tr>
 				<td width="33.33%">&nbsp;</td>
 				<td width="33.33%" align="center"><h3><%=tableType %></h3></td>
