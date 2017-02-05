@@ -79,7 +79,7 @@ if(page1.equals("") && mainMenuId != 0){
 	<table border="1" width="50%">
 		<tr>
 			<td class="headerTR">Menu Name</td>
-			<td align="center"><input type="text" name="menuName" id="menuName" value="<%=menuName%>" style="width: 98%; height: 100%"> </td>
+			<td align="center"><input type="text" name="menuName" id="menuName" value="<%=menuName%>" class="fullRowElement"> </td>
 		</tr>
 		<tr>
 			<td class="headerTR">Description</td>

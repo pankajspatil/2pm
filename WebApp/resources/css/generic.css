@@ -350,6 +350,11 @@ table.dataTable tbody tr:nth-child(2n) { background-color:#c0c0c0 } */
   background: #2d9fd0;
 }
 
+html, body{
+	width: 100%;
+	height: 100%;
+}
+
 .dataValues{
 	letter-spacing: 1px;
 	font-size: larger;
@@ -358,7 +363,8 @@ table.dataTable tbody tr:nth-child(2n) { background-color:#c0c0c0 } */
 	padding-left: 1%;
 }
 
-.fullRowElement{
+ .fullRowElement{
 	width: 100%;
-	height: 100%;
+	/* height: 100%; */
+	height: 33px;
 }

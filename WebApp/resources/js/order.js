@@ -350,11 +350,15 @@ function checkoutOrder(){
 	    					            		'autoSize' : false,
 	    					            		'autoDimensions': false,
 	    					            		'padding'       : 10,
-	    					            		'width'         : '20%',
-	    					            		'height'		: '15%',
+	    					            		'width'         : '30%',
+	    					            		'height'		: '30%',
 	    					            		'autoScale'     : false,
 	    					            		'transitionIn'  : 'none',
-	    					            		'transitionOut' : 'none'
+	    					            		'transitionOut' : 'none',
+	    					            		afterClose: function(){
+	    					            			printOrder($('#orderId').val());
+	    	    					            	window.location.href = contextPath;
+	    					                    }
 	    					            		 }).trigger('click');
 	    					            	
 	    					            	$('#delivery').css({'display' : ''});
