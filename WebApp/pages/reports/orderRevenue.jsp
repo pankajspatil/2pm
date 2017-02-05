@@ -1,5 +1,5 @@
 <%@page import="java.util.LinkedHashMap,java.text.*,java.util.Date"%>
-<%@page import="com.org.agritadka.reports.Reports"%>
+<%@page import="com.org.twopm.reports.Reports"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ include file="/pages/common/header.jsp"%>

@@ -334,8 +334,42 @@ function checkoutOrder(){
 	    				beforeClose: function(lobibox){
 	    					//window.open(contextPath + '/pages/order/printReceipt.jsp', '_blank');
 	    					//wait(2000);
-	    					printOrder($('#orderId').val());
-	    					window.location.href = contextPath;
+	    					
+	    					var tableId = $('#tableId').val();
+	    					
+	    					console.log("tableId==>" + tableId);
+	    					
+	    					if(tableId === "0"){
+	    						var lobibox = Lobibox.confirm({
+	    							msg: "Do you want to assign delivery person for this order?",
+	    							callback: function ($this, type) {
+	    					            if (type === 'yes') {
+	    					            	
+	    					            	$('a#deliveryLink').fancybox({
+	    					            		'href' : '#delivery',
+	    					            		'autoSize' : false,
+	    					            		'autoDimensions': false,
+	    					            		'padding'       : 10,
+	    					            		'width'         : '20%',
+	    					            		'height'		: '15%',
+	    					            		'autoScale'     : false,
+	    					            		'transitionIn'  : 'none',
+	    					            		'transitionOut' : 'none'
+	    					            		 }).trigger('click');
+	    					            	
+	    					            	$('#delivery').css({'display' : ''});
+	    					            	
+	    					            } else if (type === 'no') {
+	    					            	printOrder($('#orderId').val());
+	    					            	window.location.href = contextPath;
+	    					            	//return false;
+	    					            }
+	    							}
+	    						});
+	    					}else{
+	    						printOrder($('#orderId').val());
+				            	window.location.href = contextPath;
+	    					}
 	    		        }
 	    			});
 	    	  }else if(resultData == 2){
@@ -1052,4 +1086,48 @@ $( function() {
     	$("#waiterName").parent().find("a.ui-button").button("disable");
     }
 } );
+
+function assignDelivery(){
+	
+	var deliveryPersonId = $('#deliveryPerson').val();
+	
+	if(deliveryPersonId === '-1'){
+		var paramMap = new Map();
+		
+		paramMap.put(MSG, 'Please select delivery person.');
+		displayNotification(paramMap);
+		
+		return false;
+	}
+		
+	var data = {
+			"orderId" : $('#orderId').val(),
+			"deliveryPersonId" : deliveryPersonId
+	};
+			
+	var postData = {
+			"action" : "assignDelivery",
+			"data" : JSON.stringify(data)
+	};
+			
+	$.ajax({
+	      type: 'POST',
+	      url: contextPath + "/pages/ajax/postAjaxData.jsp",
+	      data: postData, 
+	      dataType: 'json',
+	      async : false,
+	      success: function(resultData) {
+	    	  if(resultData == 0){
+	    		  	printOrder($('#orderId').val());
+    				window.location.href = contextPath;
+	    	  }
+	    	},
+	    	 error: function (xhr, status) { 
+	    		 console.log('ajax error = ' + xhr.statusText);
+	    		 Lobibox.alert("error",{
+	    				msg : 'Something went wrong.'
+	    			});
+            } 
+	});
+}
 

@@ -1,8 +1,8 @@
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="com.org.agritadka.transfer.OrderData"%>
+<%@page import="com.org.twopm.transfer.OrderData"%>
 <%@page import="java.util.List"%>
-<%@page import="com.org.agritadka.order.Order"%>
+<%@page import="com.org.twopm.order.Order"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     

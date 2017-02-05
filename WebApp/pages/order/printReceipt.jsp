@@ -1,7 +1,7 @@
-<%@page import="com.org.agritadka.transfer.OrderMenu"%>
-<%@page import="com.org.agritadka.transfer.OrderData"%>
-<%@page import="com.org.agritadka.order.Order"%>
-<%@page import="com.org.agritadka.generic.Utils"%>
+<%@page import="com.org.twopm.transfer.OrderMenu"%>
+<%@page import="com.org.twopm.transfer.OrderData"%>
+<%@page import="com.org.twopm.order.Order"%>
+<%@page import="com.org.twopm.generic.Utils"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -17,7 +17,7 @@
 var contextPath = '<%=contextPath%>'; 
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" type="text/css" href="<%=contextPath%>/resources/css/print.css" media="print">
+<%-- <link rel="stylesheet" type="text/css" href="<%=contextPath%>/resources/css/print.css" media="print"> --%>
 <style type="text/css" media="print">
 @page {
     size: auto;   /* auto is the initial value */

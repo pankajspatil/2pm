@@ -1,12 +1,12 @@
 <%@page import="java.util.Date"%>
 <%@page import="com.google.gson.Gson"%>
 <%@page import="com.google.gson.JsonParser"%>
-<%@page import="com.org.agritadka.order.Order"%>
+<%@page import="com.org.twopm.order.Order"%>
 <%@page import="java.util.LinkedHashMap"%>
-<%@page import="com.org.agritadka.transfer.MenuMapper"%>
-<%@page import="com.org.agritadka.transfer.SubMenu"%>
-<%@page import="com.org.agritadka.master.Master"%>
-<%@page import="com.org.agritadka.transfer.MainMenu"%>
+<%@page import="com.org.twopm.transfer.MenuMapper"%>
+<%@page import="com.org.twopm.transfer.SubMenu"%>
+<%@page import="com.org.twopm.master.Master"%>
+<%@page import="com.org.twopm.transfer.MainMenu"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>

@@ -1,7 +1,7 @@
-<%@page import="com.org.agritadka.transfer.Table"%>
+<%@page import="com.org.twopm.transfer.Table"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.LinkedHashMap"%>
-<%@page import="com.org.agritadka.home.Home"%>
+<%@page import="com.org.twopm.home.Home"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ include file="/pages/common/header.jsp"%>
@@ -11,20 +11,23 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="<%=contextPath%>/resources/css/home.css">
-<link rel="stylesheet" type="text/css" href="<%=contextPath%>/resources/css/materialize.css"> 
+<%-- <link rel="stylesheet" type="text/css" href="<%=contextPath%>/resources/css/materialize.css">  --%>
 </head>
 <body>
-<form action="post">
+<form method="post" >
 	<table width="99%" align="center">
 		<tr>
 			<td width="33.33%">&nbsp;</td>
 			<td width="33.33%" align="center"><h1>Table Status</h1></td>
-			<td width="33.33%" align="right"><div
-					style="border: 2px solid black; width: 30%; text-align: center;">
+			<td width="33.33%" align="right">
+			<input type="button" style="vertical-align: bottom;" class="btn btn-main btn-2g" name="parcel" id="parcel" value="Parcel" onclick="openOrderPage();" />
+				<div
+					style="border: 2px solid black; width: 30%; text-align: center; display: inline-block;">
 					<div class="reactanleDiv avlblFill">Vacant</div>
 					<!-- <div>Reserved</div> -->
 					<div class="reactanleDiv occpdFill">Occupied</div>
-				</div></td>
+				</div>
+			</td>
 		</tr>
 	</table>
 	<%

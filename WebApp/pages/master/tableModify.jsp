@@ -2,9 +2,9 @@
 <%@ page errorPage="/pages/common/error.jsp" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@page import="com.org.agritadka.home.Home"%>
+<%@page import="com.org.twopm.home.Home"%>
 <%@page import="java.sql.PreparedStatement,java.sql.ResultSet" %>
-<%@page import="com.org.agritadka.generic.ConnectionsUtil,java.sql.Connection,java.sql.Statement"%>
+<%@page import="com.org.twopm.generic.ConnectionsUtil,java.sql.Connection,java.sql.Statement"%>
     
 	<%
     		PreparedStatement psmt = null;

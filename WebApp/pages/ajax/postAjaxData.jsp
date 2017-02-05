@@ -1,9 +1,9 @@
-<%@page import="com.org.agritadka.master.Master"%>
-<%@page import="com.org.agritadka.transfer.Cooking"%>
+<%@page import="com.org.twopm.master.Master"%>
+<%@page import="com.org.twopm.transfer.Cooking"%>
 <%@page import="java.util.List"%>
-<%@page import="com.org.agritadka.generic.Constants"%>
-<%@page import="com.org.agritadka.order.Order"%>
-<%@page import="com.org.agritadka.generic.Utils"%>
+<%@page import="com.org.twopm.generic.Constants"%>
+<%@page import="com.org.twopm.order.Order"%>
+<%@page import="com.org.twopm.generic.Utils"%>
 <%@page import="com.google.gson.JsonParser"%>
 <%@page import="com.google.gson.JsonObject"%>
 <%@page import="com.google.gson.Gson"%>
@@ -64,9 +64,10 @@ try{
 	}else if(action.equals("addSubMenu")){
 		returnValue = master.addSubMenu(data, userId);
 		out.println(returnValue);
+	}else if(action.equals("assignDelivery")){
+		returnValue = order.addDeliveryPerson(data, userId);
+		out.println(returnValue);
 	}
-	
-	
 	
 }catch (Exception ex){
 	System.out.println("Error while processing data for "+action);

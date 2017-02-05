@@ -1,7 +1,7 @@
-<%@page import="com.org.agritadka.transfer.Table"%>
+<%@page import="com.org.twopm.transfer.Table"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.LinkedHashMap"%>
-<%@page import="com.org.agritadka.home.Home"%>
+<%@page import="com.org.twopm.home.Home"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ include file="/pages/common/header.jsp"%>

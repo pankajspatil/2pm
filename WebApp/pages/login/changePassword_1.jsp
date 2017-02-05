@@ -1,6 +1,6 @@
 <%@page import="java.util.LinkedHashMap"%>
-<%@page import="com.org.agritadka.generic.Constants"%>
-<%@page import="com.org.agritadka.login.Login"%>
+<%@page import="com.org.twopm.generic.Constants"%>
+<%@page import="com.org.twopm.login.Login"%>
 <%@page import="java.sql.Connection,java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>

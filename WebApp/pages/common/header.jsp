@@ -1,6 +1,6 @@
-<%@page import="com.org.agritadka.generic.Utils"%>
-<%@page import="com.org.agritadka.generic.Constants"%>
-<%@page import="com.org.agritadka.generic.ConnectionsUtil"%>
+<%@page import="com.org.twopm.generic.Utils"%>
+<%@page import="com.org.twopm.generic.Constants"%>
+<%@page import="com.org.twopm.generic.ConnectionsUtil"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ include file="/pages/general/variables.jsp"%>

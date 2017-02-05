@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@page import="com.org.agritadka.master.Master"%>
-<%@page import="com.org.agritadka.transfer.SubMenu"%>
+<%@page import="com.org.twopm.master.Master"%>
+<%@page import="com.org.twopm.transfer.SubMenu"%>
 <%@page import="java.util.List"%>
 <%@ include file="/pages/common/header.jsp"%>
 <%@ include file="/pages/common/validateSession.jsp"%>

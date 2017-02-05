@@ -1,4 +1,4 @@
-<%@page import="com.org.agritadka.generic.Constants"%>
+<%@page import="com.org.twopm.generic.Constants"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="java.sql.Connection,java.util.ArrayList"%>
@@ -43,6 +43,8 @@
 								Master</span></a></li>
 					<li class='first-child'><a
 								href='<%=request.getContextPath()%>/pages/master/menuMaster.jsp'><span>Food Menu Master</span></a></li>
+					<li class='first-child'><a
+								href='<%=request.getContextPath()%>/pages/order/addExpense.jsp'><span>Expense</span></a></li>
 					<%-- <li class='has-sub'><a href='#'><span>Food Menu</span></a>
 						<ul>
 							<li class='first-child'><a
@@ -63,14 +65,14 @@
 			<li><a
 				href='<%=request.getContextPath()%>/pages/order/cookingDashboard.jsp'><span>Cooking</span></a></li>
 			<% } %>
-			<%
+			<%-- <%
 				if (menulist.contains("Parcel")) {
 			%>
 			<li onclick="openOrderPage()"><a
 				href='<%=request.getContextPath()%>/pages/order/orderPlacement.jsp'><span>Parcel</span></a></li>
-			<% } %>
+			<% } %> --%>
 			<%
-				if (menulist.contains("Reports")) {
+				if (menulist.contains("Report")) {
 			%>
 			<li class='has-sub'><a href='#'><span>Reports</span></a>
 				<ul>

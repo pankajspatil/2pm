@@ -1,5 +1,5 @@
-<%@page import="com.org.agritadka.login.Login"%>
-<%@page import="com.org.agritadka.generic.Utils"%>
+<%@page import="com.org.twopm.login.Login"%>
+<%@page import="com.org.twopm.generic.Utils"%>
 <%@page import="java.util.LinkedHashMap"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
