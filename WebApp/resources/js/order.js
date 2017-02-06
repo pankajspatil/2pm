@@ -346,22 +346,23 @@ function checkoutOrder(){
 	    					            if (type === 'yes') {
 	    					            	
 	    					            	$('a#deliveryLink').fancybox({
-	    					            		'href' : '#delivery',
+	    					            		'href' : contextPath + '/pages/order/deliveryAssignment.jsp?menuRequired=false&callingType=inline&deliveryTrackerId=0&orderId='+ $('#orderId').val() ,
 	    					            		'autoSize' : false,
 	    					            		'autoDimensions': false,
 	    					            		'padding'       : 10,
-	    					            		'width'         : '30%',
-	    					            		'height'		: '30%',
+	    					            		'width'         : '50%',
+	    					            		'height'		: '50%',
 	    					            		'autoScale'     : false,
 	    					            		'transitionIn'  : 'none',
 	    					            		'transitionOut' : 'none',
+	    					            		'type' 			: 'iframe',
 	    					            		afterClose: function(){
 	    					            			printOrder($('#orderId').val());
 	    	    					            	window.location.href = contextPath;
 	    					                    }
 	    					            		 }).trigger('click');
 	    					            	
-	    					            	$('#delivery').css({'display' : ''});
+	    					            	/*$('#delivery').css({'display' : ''});*/
 	    					            	
 	    					            } else if (type === 'no') {
 	    					            	printOrder($('#orderId').val());
@@ -421,7 +422,7 @@ function openOrderPage(tableId, tableName, priceType, orderId){
 				.attr("method","post");
 	
 	if(tableId !== undefined && tableId != null){
-		var tableIdObj = $("<input></input>")
+		var tableIdObj = $("<input type='hidden'></input>")
 		.attr("name","tableId")
 		.attr("id","tableId")
 		.attr("value", tableId);
@@ -429,7 +430,7 @@ function openOrderPage(tableId, tableName, priceType, orderId){
 		form.append(tableIdObj);
 	}
 	if(tableName !== undefined && tableName != null){
-		var tableNameObj = $("<input></input>")
+		var tableNameObj = $("<input type='hidden'></input>")
 		.attr("name","tableName")
 		.attr("id","tableName")
 		.attr("value", tableName);
@@ -438,7 +439,7 @@ function openOrderPage(tableId, tableName, priceType, orderId){
 	}
 	
 	if(priceType !== undefined && priceType != null){
-		var tablePriceTypeObj = $("<input></input>")
+		var tablePriceTypeObj = $("<input type='hidden'></input>")
 		.attr("name","priceType")
 		.attr("id","priceType")
 		.attr("value", priceType);
@@ -447,7 +448,7 @@ function openOrderPage(tableId, tableName, priceType, orderId){
 	}
 	
 	if(orderId != null){
-		var orderIdObj = $("<input></input>")
+		var orderIdObj = $("<input type='hidden'></input>")
 		.attr("name","orderId")
 		.attr("id","orderId")
 		.attr("value", orderId);
@@ -1091,7 +1092,7 @@ $( function() {
     }
 } );
 
-function assignDelivery(){
+function assignDelivery(orderId, deliveryTrackerId, callingType){
 	
 	var deliveryPersonId = $('#deliveryPerson').val();
 	
@@ -1105,8 +1106,9 @@ function assignDelivery(){
 	}
 		
 	var data = {
-			"orderId" : $('#orderId').val(),
-			"deliveryPersonId" : deliveryPersonId
+			"orderId" : orderId,
+			"deliveryPersonId" : deliveryPersonId,
+			"deliveryTrackerId" : deliveryTrackerId
 	};
 			
 	var postData = {
@@ -1122,8 +1124,12 @@ function assignDelivery(){
 	      async : false,
 	      success: function(resultData) {
 	    	  if(resultData == 0){
-	    		  	printOrder($('#orderId').val());
-    				window.location.href = contextPath;
+	    		  if(callingType == 'inline'){
+	    			    printOrder(orderId);
+	    				parent.location.href = contextPath;  
+	    		  }else{
+	    			  parent.location.reload();
+	    		  }
 	    	  }
 	    	},
 	    	 error: function (xhr, status) { 
@@ -1135,3 +1141,62 @@ function assignDelivery(){
 	});
 }
 
+function deliveredOrder(deliveryTrackerId){
+
+	var lobibox = Lobibox.confirm({
+		msg: "Do you want to mark this order delivered?",
+		callback: function ($this, type) {
+            if (type === 'yes') {
+            	
+            	var data = {
+            			"deliveryTrackerId" : deliveryTrackerId
+            	};
+            			
+            	var postData = {
+            			"action" : "markDelivered",
+            			"data" : JSON.stringify(data)
+            	};
+            			
+            	$.ajax({
+            	      type: 'POST',
+            	      url: contextPath + "/pages/ajax/postAjaxData.jsp",
+            	      data: postData, 
+            	      dataType: 'json',
+            	      async : false,
+            	      success: function(resultData) {
+            	    	  if(resultData == 0){
+            	    		  	window.location.reload();
+            	    	  }
+            	    	},
+            	    	 error: function (xhr, status) { 
+            	    		 console.log('ajax error = ' + xhr.statusText);
+            	    		 Lobibox.alert("error",{
+            	    				msg : 'Something went wrong.'
+            	    			});
+                        } 
+            	});
+            	
+            } else if (type === 'no') {
+            	return false;
+            }
+		}
+	});
+	
+}
+
+function reassignDelivery(orderId, deliveryTrackerId){
+	
+	$('a#deliveryLink').fancybox({
+		'href' : contextPath + '/pages/order/deliveryAssignment.jsp?menuRequired=false&deliveryTrackerId='+deliveryTrackerId+'&orderId='+ orderId ,
+		'autoSize' : false,
+		'autoDimensions': false,
+		'padding'       : 10,
+		'width'         : '50%',
+		'height'		: '35%',
+		'autoScale'     : false,
+		'transitionIn'  : 'none',
+		'transitionOut' : 'none',
+		'type' 			: 'iframe'
+		 }).trigger('click');
+	
+}

@@ -21,6 +21,7 @@ Order order = new Order();
 String fromDate = Utils.getString(request.getParameter("fromDate"));
 String toDate = Utils.getString(request.getParameter("toDate"));
 String reportType = Utils.getString(request.getParameter("reportType"));
+Integer userId = Integer.parseInt(session.getAttribute(Constants.USER_ID).toString());
 
 String page1 = Utils.getString(request.getParameter("page1"));
 if (fromDate.equals("") && page1.equals("")){
@@ -30,11 +31,11 @@ if (fromDate.equals("") && page1.equals("")){
 	 fromDate = date;
 	 toDate = date;
 	}
-List<OrderData> orderList = order.getAllOrders(fromDate, toDate, null);
+List<OrderData> orderList = order.getAllOrders(fromDate, toDate, userId);
 
 %>
 <center>
-	<h1>Order Dashboard</h1>
+	<h1>Delivery Dashboard</h1>
 	
 	<form action="" method="post">
 	<table align="center" border="0" width="30%">
@@ -90,35 +91,19 @@ List<OrderData> orderList = order.getAllOrders(fromDate, toDate, null);
 				<td><%=Utils.getString(orderData.getCustName()) %></td>
 				<td><%=Utils.getString(orderData.getMobileNumber()) %></td>
 				<td align="left">
-					<% if(orderData.getStatusCode().equals("INQUEUE")){
-						%><img style="margin-left: 40%" height="36%" src="<%=contextPath%>/resources/images/edit.png" 
-							onclick="openOrderPage(null,null,null,<%=orderData.getOrderId()%>)">&nbsp;
-							<%if(Utils.getString(orderData.getTableName()).equals("")){
-								%>
-									<img height="31%" src="<%=contextPath%>/resources/images/print.png"
-							onclick="printOrder(<%=orderData.getOrderId()%>)">
-								<%
-							}
-					}else {
-						
-						if(Utils.getString(orderData.getTableName()).equals("")){
-							%><img height="9%" style="margin-left: 40%" src="<%=contextPath%>/resources/images/delivery.png"
-									onclick="reassignDelivery(<%=orderData.getOrderId()%>, <%=orderData.getDeliveryTracker().getDeliveryTrackerId()%>)">
-							<img height="31%" src="<%=contextPath%>/resources/images/print.png"
-							onclick="printOrder(<%=orderData.getOrderId()%>)">
-							<%
-						}else{
-							%><img height="31%" style="margin-left: 60%" src="<%=contextPath%>/resources/images/print.png"
-									onclick="printOrder(<%=orderData.getOrderId()%>)"><%
-						}
-					}
-					%></td>
+					
+					<img height="9%" style="margin-left: 40%" src="<%=contextPath%>/resources/images/delivery.png"
+					onclick="deliveredOrder(<%=orderData.getDeliveryTracker().getDeliveryTrackerId()%>)">
+					
+					<img height="31%" src="<%=contextPath%>/resources/images/print.png"
+					onclick="printOrder(<%=orderData.getOrderId()%>)">		
+				</td>
 			</tr><%
 		}
 		%>
 		</tbody>
 	</table>
-<a id="deliveryLink" href="#"></a>
+
 </center>
 <script src="<%=contextPath%>/resources/js/order.js" type="text/javascript"></script>
 <script src="<%=contextPath%>/resources/js/reports.js" type="text/javascript"></script>

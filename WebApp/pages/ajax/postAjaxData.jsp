@@ -67,6 +67,9 @@ try{
 	}else if(action.equals("assignDelivery")){
 		returnValue = order.addDeliveryPerson(data, userId);
 		out.println(returnValue);
+	}else if(action.equals("markDelivered")){
+		returnValue = order.updateDeliveryStatus(data, userId);
+		out.println(returnValue);
 	}
 	
 }catch (Exception ex){

@@ -645,19 +645,27 @@ public class Order {
 		return returnVal;
 	}
 	
-	public List<OrderData> getAllOrders(String fromDate, String toDate) throws SQLException{
+	public List<OrderData> getAllOrders(String fromDate, String toDate, Integer deliveryPersonId) throws SQLException{
 		
 		ConnectionsUtil connectionsUtil = new ConnectionsUtil();
 		Connection conn = connectionsUtil.getConnection();
 		
-		String query = "select o.order_id,o.order_sequence, o.created_on, t.table_name, status_code, status_name, "+
-						"customer_name, o.mobile_number,customer_address, concat(wfirst_name, ' ',wmiddle_name, ' ', wlast_name) as waiter_name "+
+		String query = "select o.order_id,o.order_sequence, o.created_on, t.table_name, s.status_code, s.status_name, "+
+						"customer_name, o.mobile_number,customer_address, concat(wfirst_name, ' ',wmiddle_name, ' ', wlast_name) as waiter_name, "+
+						"dt.delivery_tracker_id, dt.delivery_person_id, dt.status_id as deliveryStatus, st.status_name as dStatusName " +
 						"from order_master o "+
 						"inner join status_master s on o.status_id = s.status_id and o.created_on between ? AND ? "+
 						"left join table_type_name_map ttn on o.table_id = ttn.table_type_name_map_id "+
 						"left join table_master t on ttn.table_id = t.table_id "+
 						"left join waiter_master w on o.waiter_id = w.waiter_id "+
-						"order by o.order_id desc; ";
+						"left join delivery_tracker dt on o.order_id = dt.order_id "+
+						"left join user_master dp on dp.user_id = dt.delivery_person_id "+
+						"left join status_master st on st.status_id = dt.status_id ";
+						if(deliveryPersonId != null){
+							query += " where dt.delivery_person_id = "+ deliveryPersonId + " and st.status_code = 'INDELIVERY' ";
+						}
+		
+						query += " order by o.order_id desc; ";
 		
 		PreparedStatement psmt = conn.prepareStatement(query);
 		psmt.setString(1, fromDate + " 00:00:00");
@@ -666,10 +674,25 @@ public class Order {
 		ResultSet dataRS = psmt.executeQuery();
 		
 		OrderData orderData = new OrderData();
+		DeliveryTracker deliveryTracker = null;
+		User deliveryPerson = null;
+		Status deliveryStatus = null;
+		
 		List<OrderData> orderList = new ArrayList<OrderData>();
 		
 		while(dataRS.next()){
 			orderData = new OrderData();
+			
+			deliveryPerson = new User();
+			deliveryPerson.setId(dataRS.getInt("delivery_person_id"));
+			
+			deliveryTracker = new DeliveryTracker();
+			deliveryTracker.setDeliveryTrackerId(dataRS.getInt("delivery_tracker_id"));
+			
+			deliveryStatus = new Status();
+			deliveryStatus.setStatusId(dataRS.getInt("deliveryStatus"));
+			deliveryStatus.setStatusName(dataRS.getString("dStatusName"));
+			
 			orderData.setOrderId(dataRS.getInt("order_id"));
 			orderData.setOrder_sequence(dataRS.getString("order_sequence"));
 			orderData.setStatusCode(dataRS.getString("status_code"));
@@ -679,6 +702,8 @@ public class Order {
 			orderData.setDateTime(dataRS.getString("created_on"));
 			orderData.setWaiterName(dataRS.getString("waiter_name"));
 			orderData.setTableName(dataRS.getString("table_name"));
+			
+			orderData.setDeliveryTracker(deliveryTracker);
 			
 			orderList.add(orderData);
 		}
@@ -779,7 +804,7 @@ public class Order {
 		ConnectionsUtil connectionsUtil = new ConnectionsUtil();
 		Connection conn = connectionsUtil.getConnection();
 		
-		String query = "select * from delivery_person_master ";
+		String query = "select * from user_master ";
 		if(isActive){
 			query += " where is_active = 1";
 		}
@@ -793,13 +818,13 @@ public class Order {
 			
 			deliveryPerson = new User();
 			
-			deliveryPerson.setId(dataRS.getInt("delivery_person_id"));
+			deliveryPerson.setId(dataRS.getInt("user_id"));
 			deliveryPerson.setFirstName(Utils.getString(dataRS.getString("first_name")));
 			deliveryPerson.setMiddleName(Utils.getString(dataRS.getString("middle_name")));
 			deliveryPerson.setLastName(Utils.getString(dataRS.getString("last_name")));
-			deliveryPerson.setEmailAddress(dataRS.getString("email_address"));
-			deliveryPerson.setAddress(dataRS.getString("address"));
-			deliveryPerson.setContactNumber(dataRS.getString("mobile_number"));
+			deliveryPerson.setEmailAddress(dataRS.getString("email"));
+			//deliveryPerson.setAddress(dataRS.getString("address"));
+			//deliveryPerson.setContactNumber(dataRS.getString("mobile_number"));
 			
 			deliveryPersonList.add(deliveryPerson);
 		}
@@ -808,16 +833,16 @@ public class Order {
 	}
 	
 	
-public List<DeliveryTracker> getDeliveryTrackers(Integer deliveryPersonId) throws SQLException{
+public List<DeliveryTracker> getDeliveryTrackers(Integer deliveryTrackerId) throws SQLException{
 		
 		ConnectionsUtil connectionsUtil = new ConnectionsUtil();
 		Connection conn = connectionsUtil.getConnection();
 		
 		String query = "select * from delivery_tracker dt "+
-					"inner join delivery_person_master dp on dt.delivery_person_id = dp.delivery_person_id ";
+					"inner join user_master dp on dt.delivery_person_id = dp.user_id ";
 				
-				if(deliveryPersonId != null){
-					query += " and dt.delivery_person_id = " + deliveryPersonId;
+				if(deliveryTrackerId != null){
+					query += " and dt.delivery_tracker_id = " + deliveryTrackerId;
 				}
 					
 		query += " inner join status_master s on s.status_id = dt.status_id order by dt.created_on";
@@ -834,7 +859,7 @@ public List<DeliveryTracker> getDeliveryTrackers(Integer deliveryPersonId) throw
 			tracker = new DeliveryTracker();
 			deliveryStatus = new Status();
 			
-			deliveryPerson.setId(dataRS.getInt(dataRS.getInt("delivery_person_id")));
+			deliveryPerson.setId(Utils.getInt(dataRS.getInt("delivery_person_id")));
 			deliveryPerson.setFirstName(Utils.getString(dataRS.getString("first_name")));
 			deliveryPerson.setMiddleName(Utils.getString(dataRS.getString("middle_name")));
 			deliveryPerson.setLastName(Utils.getString(dataRS.getString("last_name")));
@@ -865,20 +890,60 @@ public Integer addDeliveryPerson(String data, String userId) throws SQLException
 
 	Integer orderId = jsonObject.get("orderId").getAsInt();
 	Integer deliveryPersonId = jsonObject.get("deliveryPersonId").getAsInt();
+	Integer deliveryTrackerId = jsonObject.get("deliveryTrackerId").getAsInt();
 	
-	String query = "insert into delivery_tracker(order_id, delivery_person_id, status_id, created_by) "+
+	String query = "";
+	PreparedStatement psmt;
+	
+	if(deliveryTrackerId == 0){
+
+	query = "insert into delivery_tracker(order_id, delivery_person_id, status_id, created_by) "+
 					"values(?, ?, (select status_id from status_master where status_code = 'INDELIVERY'), ?)";
 	
-	PreparedStatement psmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+	psmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 	
 	psmt.setInt(1, orderId);
 	psmt.setInt(2, deliveryPersonId);
 	psmt.setString(3, userId);
+	psmt.executeUpdate();
+	
+	}else{
+		query = "update delivery_tracker set delivery_person_id = ?, created_by = ? where delivery_tracker_id = ?";
+		
+		psmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+		
+		psmt.setInt(1, deliveryPersonId);
+		psmt.setString(2, userId);
+		psmt.setInt(3, deliveryTrackerId);
+		
+		psmt.executeUpdate();
+	}
+	return 0;
+}
+
+public Integer updateDeliveryStatus(String data, String userId) throws SQLException{
+	
+	
+	ConnectionsUtil connectionsUtil = new ConnectionsUtil();
+	Connection conn = connectionsUtil.getConnection();
+	
+	JsonObject jsonObject = Utils.getJSONObjectFromString(data);
+
+	Integer deliveryTrackerId = jsonObject.get("deliveryTrackerId").getAsInt();
+	
+	String query = "update delivery_tracker set status_id = (select status_id from status_master where status_code = 'DELIVERED'),  "+
+					"created_by = ? where delivery_tracker_id = ?";
+	
+	PreparedStatement psmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+	
+	psmt.setString(1, userId);
+	psmt.setInt(2, deliveryTrackerId);
 	
 	psmt.executeUpdate();
 	
 	return 0;
 }
+
 
 
 }

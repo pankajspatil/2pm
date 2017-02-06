@@ -34,6 +34,8 @@ public class OrderData {
 	
 	private Float discountAmt;
 	
+	private DeliveryTracker deliveryTracker;
+	
 	public Integer getOrderId() {
 		return orderId;
 	}
@@ -154,16 +156,25 @@ public class OrderData {
 		this.discountAmt = discountAmt;
 	}
 
+	public DeliveryTracker getDeliveryTracker() {
+		return deliveryTracker;
+	}
+
+	public void setDeliveryTracker(DeliveryTracker deliveryTracker) {
+		this.deliveryTracker = deliveryTracker;
+	}
+
 	@Override
 	public String toString() {
-		return "OrderData [orderId=" + orderId + ", tableTypeNameId="
-				+ tableTypeNameId + ", tableName=" + tableName
-				+ ", selectedMenus=" + selectedMenus + ", statusCode="
-				+ statusCode + ", statusName=" + statusName + ", dateTime="
-				+ dateTime + ", custName=" + custName + ", mobileNumber="
-				+ mobileNumber + ", waiterName=" + waiterName
-				+ ", custAddress=" + custAddress + ", taxRate=" + taxRate
-				+ ", advanceAmt=" + advanceAmt + ", discountAmt=" + discountAmt
-				+ "]";
+		return "OrderData [orderId=" + orderId + ", order_sequence="
+				+ order_sequence + ", tableTypeNameId=" + tableTypeNameId
+				+ ", tableName=" + tableName + ", selectedMenus="
+				+ selectedMenus + ", statusCode=" + statusCode
+				+ ", statusName=" + statusName + ", dateTime=" + dateTime
+				+ ", custName=" + custName + ", mobileNumber=" + mobileNumber
+				+ ", waiterName=" + waiterName + ", custAddress=" + custAddress
+				+ ", taxRate=" + taxRate + ", advanceAmt=" + advanceAmt
+				+ ", discountAmt=" + discountAmt + ", deliveryTracker="
+				+ deliveryTracker + "]";
 	}
 }

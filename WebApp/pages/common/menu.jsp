@@ -17,22 +17,30 @@
 		value="<%=request.getContextPath()%>" />
 	<div id='cssmenu'>
 		<ul>
-			<%
-				if (menulist.contains("Home")) {
-			%>
-			<li><a
-				href='<%=request.getContextPath()%>/pages/common/home.jsp'><span>Home</span></a>
+			<% if (menulist.contains("Home")) {%>
+			<li>
+				<a href='<%=request.getContextPath()%>/pages/common/home.jsp'><span>Home</span></a>
 			</li>
-			<%}%>
-			<%
-				if (menulist.contains("Order")) {
-			%>
-			<li><a
-				href='<%=request.getContextPath()%>/pages/order/orderDashboard.jsp'><span>Order</span></a>
+			<%} if (menulist.contains("Dashboard")) {%>
+			
+			<li class='has-sub'>
+				<a href='#'><span>Dashboard</span></a>
+				<ul>
+					<%if (menulist.contains("Order")) {%>
+					<li>
+						<a href='<%=request.getContextPath()%>/pages/order/orderDashboard.jsp'><span>Order</span></a>
+					</li>
+					<%} if (menulist.contains("Cooking")) {%>
+					<li>
+						<a href='<%=request.getContextPath()%>/pages/order/cookingDashboard.jsp'><span>Cooking</span></a></li>
+					<% } if (menulist.contains("Delivery")) {%>
+					<li><a
+						href='<%=request.getContextPath()%>/pages/order/deliveryDashboard.jsp'><span>Delivery</span></a></li>
+					<% } %>
+				</ul>
 			</li>
-			<%
-				}
-			%>
+			<% } %>
+			
 			<%
 				if (menulist.contains("Master")) {
 			%>
@@ -45,26 +53,10 @@
 								href='<%=request.getContextPath()%>/pages/master/menuMaster.jsp'><span>Food Menu Master</span></a></li>
 					<li class='first-child'><a
 								href='<%=request.getContextPath()%>/pages/order/addExpense.jsp'><span>Expense</span></a></li>
-					<%-- <li class='has-sub'><a href='#'><span>Food Menu</span></a>
-						<ul>
-							<li class='first-child'><a
-								href='<%=request.getContextPath()%>/pages/master/menuMaster.jsp'><span>Food Menu</span></a></li>
-							<li>
-								<a href='<%=request.getContextPath()%>/pages/master/addFoodDishes.jsp'>
-									<span>Dishes</span>
-								</a>
-							</li>
-						</ul>
-					</li> --%>
 				</ul>
 			</li>
 			<% } %>
-			<%
-				if (menulist.contains("Cooking")) {
-			%>
-			<li><a
-				href='<%=request.getContextPath()%>/pages/order/cookingDashboard.jsp'><span>Cooking</span></a></li>
-			<% } %>
+			
 			<%-- <%
 				if (menulist.contains("Parcel")) {
 			%>

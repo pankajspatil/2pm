@@ -294,45 +294,6 @@ List<Waiter> waiterList = order.getWaiterList();
 </script>
 <!-- <div style="border: 1px solid black; width: 50%; height: 200px;display: inline-block;">Div1</div>
 <div style="border: 1px solid black;;margin-left: 52%; height: 200px;display: inline-block;">Div2</div> -->
-<% 
-
-List<User> deliveryPersonList = order.getDeliveryPersonList(true);
-String personName = "";
-%>
 <a href="#" id="deliveryLink"></a>
-<div id="delivery" style="display: none;">
-<table width="99%" align="center">
-	<tr align="center">
-		<th>
-			<h3>Select Person</h3>
-		</th>
-	</tr>
-	<tr>
-		<td>
-			<select id="deliveryPerson" name="deliveryPerson" class="fullRowElement">
-				<option value="-1">Please Select</option>
-				<%for(User deliveryPerson : deliveryPersonList){
-					
-					personName = deliveryPerson.getFirstName() + " ";
-					personName += deliveryPerson.getMiddleName() + " ";
-					personName += deliveryPerson.getLastName();
-					
-					personName = personName.trim();
-					%><option value="<%=deliveryPerson.getId()%>"><%=personName %></option><%
-				}%>
-			</select>
-		</td>
-	</tr>
-	<tr>
-		<td>&nbsp;</td>
-	</tr>
-	<tr align="center">
-		<td>
-			<input class="btn btn-main btn-2g" type="button" value="Assign" name="deliveryAssign" id="deliveryAssign" onclick="assignDelivery()" />
-		</td>
-	</tr>
-</table>
-</div>
-
 </body>
 </html>
