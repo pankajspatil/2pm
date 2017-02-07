@@ -521,14 +521,18 @@ public List<ExpenseItem> getAllExpenseItems(Boolean isActive) throws SQLExceptio
 	return itemList;
 }
 
-public List<Vendor> getAllVendors(Boolean isActive) throws SQLException{
+public List<Vendor> getAllVendors(Boolean isActive, Integer vendorId) throws SQLException{
 
 ConnectionsUtil connectionsUtil = new ConnectionsUtil();
 Connection conn = connectionsUtil.getConnection();
 
 String query = "select * from vendor_master";
-if(isActive){
+if(isActive && vendorId != 0){
+	query += " where is_active = 1 and vendor_id = "+ vendorId;
+}else if(isActive){
 	query += " where is_active = 1";
+}else if(vendorId != 0){
+	query += " where vendor_id = "+ vendorId;
 }
 
 ResultSet dataRS = conn.createStatement().executeQuery(query);
@@ -541,6 +545,10 @@ while(dataRS.next()){
 	vendor.setVendorId(dataRS.getInt("vendor_id"));
 	vendor.setVendorName(dataRS.getString("vendor_name"));
 	vendor.setIsActive(dataRS.getBoolean("is_active"));
+	vendor.setVendorAddress(dataRS.getString("address"));
+	vendor.setCreatedBy(dataRS.getInt("created_by"));
+	vendor.setCreatedOn(dataRS.getString("created_on"));
+	vendor.setContactNo(dataRS.getString("contact_no"));
 	
 	vendorList.add(vendor);
 }
@@ -548,6 +556,56 @@ while(dataRS.next()){
 connectionsUtil.closeConnection(conn);
 
 return vendorList;
+}
+
+public Vendor insertVendor(Vendor vendor, String userId) throws SQLException{
+	ConnectionsUtil connectionsUtil = new ConnectionsUtil();
+	Connection conn = connectionsUtil.getConnection();
+	
+	String query = "insert into vendor_master(vendor_name, contact_no, address, is_active, created_by) values(?,?,?,?,?)";
+	
+	PreparedStatement psmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+	
+	
+	psmt.setString(1, vendor.getVendorName());
+	psmt.setString(2, vendor.getContactNo());
+	psmt.setString(3, vendor.getVendorAddress());
+	psmt.setBoolean(4, vendor.getIsActive());
+	psmt.setString(5, userId);
+	
+	psmt.executeUpdate();
+	
+	ResultSet dataRS = psmt.getGeneratedKeys();
+	if(dataRS.next()){
+		vendor.setVendorId(dataRS.getInt(1));
+	}
+	
+	connectionsUtil.closeConnection(dataRS);
+	
+	return vendor;
+}
+
+public Vendor updateVendor(Vendor vendor, String userId) throws SQLException{
+	ConnectionsUtil connectionsUtil = new ConnectionsUtil();
+	Connection conn = connectionsUtil.getConnection();
+	
+	String query = "update vendor_master set vendor_name = ?, contact_no = ?, address = ?, is_active = ?, created_by = ? where vendor_id = ?";
+	
+	PreparedStatement psmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+	
+	
+	psmt.setString(1, vendor.getVendorName());
+	psmt.setString(2, vendor.getContactNo());
+	psmt.setString(3, vendor.getVendorAddress());
+	psmt.setBoolean(4, vendor.getIsActive());
+	psmt.setString(5, userId);
+	psmt.setInt(6, vendor.getVendorId());
+	
+	psmt.executeUpdate();
+	
+	connectionsUtil.closeConnection(conn);
+	
+	return vendor;
 }
 
 }

@@ -46,13 +46,26 @@
 			%>
 			<li class='has-sub'><a href='#'><span>Master</span></a>
 				<ul>
-					<li class='first-child'><a
-						href='<%=request.getContextPath()%>/pages/master/tableMaster.jsp'><span>Table
-								Master</span></a></li>
-					<li class='first-child'><a
-								href='<%=request.getContextPath()%>/pages/master/menuMaster.jsp'><span>Food Menu Master</span></a></li>
-					<li class='first-child'><a
-								href='<%=request.getContextPath()%>/pages/order/addExpense.jsp'><span>Expense</span></a></li>
+					<li class='first-child'>
+						<a href='<%=request.getContextPath()%>/pages/master/tableMaster.jsp'>
+							<span>Table Master</span>
+						</a>
+					</li>
+					<li class='first-child'>
+						<a href='<%=request.getContextPath()%>/pages/master/menuMaster.jsp'>
+							<span>Food Menu Master</span>
+						</a>
+					</li>
+					<li class='first-child'>
+						<a href='<%=request.getContextPath()%>/pages/master/addVendor.jsp'>
+							<span>Vendor Master</span>
+						</a>
+					</li>
+					<li class='first-child'>
+						<a href='<%=request.getContextPath()%>/pages/order/addExpense.jsp'>
+							<span>Expense</span>
+						</a>
+					</li>
 				</ul>
 			</li>
 			<% } %>

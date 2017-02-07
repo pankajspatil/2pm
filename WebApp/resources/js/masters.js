@@ -40,7 +40,38 @@ $(document).ready(function() {
 			 collapsible: true ,
 			 defaultTab: 'li#mainMenuTab'
 			 });
+	   
+	   $('#newVendor').click(function(){
+		   openVendorFancyBox(0, 'newVendor', this);
+		});
+	   
+	   var vendorTable = $('#vendorTable').DataTable({
+	    	"bSort" : true,
+	    	"paging" : true,
+	    	"order": [[ 0, "asc" ]]/*,
+	    	"pageLength": 15,
+	    	"aLengthMenu": [[10, 15, 25, 35, 50, 100], [10, 15, 25, 35, 50, 100]]*/	
+	    });
+	   
+	   $('img[name=editVendor]').click(function(e){
+		   updateMenuRecord(this);
+		});
 });
+
+function openVendorFancyBox(vendorId, menuType, obj){
+	
+	var paramMap = new Map();
+	
+	var url, btnObj;
+	
+	url = contextPath + '/pages/master/createVendor.jsp?menuRequired=false&vendorId=' + vendorId;
+	
+	paramMap.put(URL, url);
+	paramMap.put(WIDTH, '70%');
+	paramMap.put(HEIGHT, '80%');
+	
+	openFancyBox(obj, paramMap);
+}
 
 function openMenuFancyBox(menuId, menuType, obj){
 	
@@ -68,6 +99,12 @@ function updateMenuRecord(imgObj){
 	openMenuFancyBox(menuId, menuType, imgObj);
 }
 
+function updateVendorRecord(imgObj){
+	
+	var vendorId =  imgObj.id;
+	openVendorFancyBox(vendorId, 'updateVendor', imgObj);
+}
+
 function deleteMenuRecord(imgObj){
 	var menuId =  imgObj.id.split('_')[1];
 	var menuType = imgObj.id.split('_')[0];
@@ -78,14 +115,17 @@ function deleteMenuRecord(imgObj){
 
 var options = {
 		  valueNames: [ 'name', { data: ['id'] } ],
-		  page: 3,
+		  page: 10,
 		  plugins: [ ListPagination({}) ],
 		  // Since there are no elements in the list, this will be used as template.
 		  item: '<li><h3 class="name ui-widget-content" style="font-size:large"></h3></li>'
 		};
 
 var userList = new List('allSubMenu', options);
-userList.clear();
+
+if(userList.size() != 0){
+	userList.clear();
+}
 
 //Main menu id
 var mainMenuId;
@@ -273,6 +313,40 @@ function validateMainMenuForm(){
 	}
 	
 }
+
+function validateVendorForm(){
+	
+	var vendorName = $('#vendorName').val();
+	var contactNo = $('#contactNo').val();
+	
+	var paramMap = new Map();
+	if(vendorName.trim() == ''){
+		paramMap.put(MSG, 'Please enter vendor name.');
+		displayNotification(paramMap);
+		
+		return false;
+	}
+	
+	if(contactNo.trim() == ''){
+		paramMap.put(MSG, 'Please enter contact number.');
+		displayNotification(paramMap);
+		
+		return false;
+	}
+	
+	if(vendorName.toLowerCase() !== oldVendorName.toLowerCase()){
+		var vendorNameArray = parent.$('#vendorTable').DataTable().column(0).data();	
+		vendorNameArray = convertCaseArray(vendorNameArray, LOWER_CASE);
+		
+		if(vendorNameArray.includes(vendorName.toLowerCase())){
+			paramMap.put(MSG, 'Duplicate vendor name.');
+			displayNotification(paramMap);
+			return false;
+		}
+	}
+	
+}
+
 
 function validateSubMenuForm(){
 	

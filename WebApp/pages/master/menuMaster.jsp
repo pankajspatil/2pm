@@ -42,7 +42,7 @@
 	//List<MenuMapper> menuMapperList = master.getAllSubMenus(false);
 %>
 
-<div style="float: right; margin-right: 1%">
+<div style="float: right; margin-right: 1%;">
 	Add : 
 	<button class="btn btn-main btn-2g" name="mainMenuBtn" id="mainMenuBtn" onclick="openMenuFancyBox(0, 'mainMenu', this);">Main Menu</button>
 	<button class="btn btn-main btn-2g" name="subMenuBtn" id="subMenuBtn">Sub Menu</button>&nbsp;&nbsp;
@@ -58,11 +58,11 @@
 			<table id="mainMenuTable" border="0" width="100%">
 				<thead>
 					<tr class="headerTR">
-						<td width="25%">Menu Name</td>
-						<td width="40%">Description</td>
-						<td width="15%">V/NV</td>
-						<td width="10%">Active</td>
-						<td width="10%">Action</td>
+						<th width="25%">Menu Name</th>
+						<th width="40%">Description</th>
+						<th width="15%">V/NV</th>
+						<th width="10%">Active</th>
+						<th width="10%">Action</th>
 					</tr>
 				</thead>
 				<tbody>

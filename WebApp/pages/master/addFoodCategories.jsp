@@ -31,7 +31,7 @@ if(page1.equals("") && mainMenuId != 0){
 	foodType = mainMenu.isVeg();
 	active = mainMenu.isActive();
 	
-	System.out.println("Active iN Update===>" + mainMenu.isActive());
+	//System.out.println("Active iN Update===>" + mainMenu.isActive());
 	
 }else{
 	
@@ -42,7 +42,7 @@ if(page1.equals("") && mainMenuId != 0){
 	foodType = Boolean.parseBoolean(Utils.getString(request.getParameter("foodType")));
 	active = Boolean.parseBoolean(Utils.getString(request.getParameter("active")));
 	
-	System.out.println("Active==>" + Utils.getString(request.getParameter("active")));
+	//System.out.println("Active==>" + Utils.getString(request.getParameter("active")));
 	
 	mainMenu = new MainMenu();
 	mainMenu.setMainMenuName(menuName);
@@ -76,17 +76,17 @@ if(page1.equals("") && mainMenuId != 0){
 <center>
 <h1> New Menu Category</h1>
 <form name="mainMenuForm" id="mainMenuform" method="post" action="">
-	<table border="1" width="50%">
+	<table border="1" width="50%" style="border: 0px solid;">
 		<tr>
-			<td class="headerTR">Menu Name</td>
+			<th class="headerTR">Menu Name</th>
 			<td align="center"><input type="text" name="menuName" id="menuName" value="<%=menuName%>" class="fullRowElement"> </td>
 		</tr>
 		<tr>
-			<td class="headerTR">Description</td>
+			<th class="headerTR">Description</th>
 			<td><textarea rows="4" cols="" name="description" id="description" style="width: 98%;"><%=descritpion %></textarea> </td>
 		</tr>
 		<tr>
-			<td class="headerTR">Food Type</td>
+			<th class="headerTR">Food Type</th>
 			<td>
 			<%if(foodType){
 				%>
@@ -106,7 +106,7 @@ if(page1.equals("") && mainMenuId != 0){
 			</td>
 		</tr>
 		<tr>
-			<td class="headerTR">Active</td>
+			<th class="headerTR">Active</th>
 			<td>
 			<%String activeSelected = "";
 				
@@ -118,7 +118,7 @@ if(page1.equals("") && mainMenuId != 0){
 			<input type="checkbox" value="true" name="active" id="active" <%=activeSelected %>></td>
 		</tr>
 		<tr>
-			<td colspan="2" align="center"><input type="submit" name="page1" value="<%=submitText %>" class="btn btn-main btn-2g" onclick="return validateMainMenuForm()"></td>
+			<th colspan="2" align="center"><input type="submit" name="page1" value="<%=submitText %>" class="btn btn-main btn-2g" onclick="return validateMainMenuForm()"></th>
 		</tr>
 	</table>
 	<input type="hidden" name="mainMenuId" id="mainMenuId" value="<%=mainMenuId%>">

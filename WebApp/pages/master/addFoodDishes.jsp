@@ -80,25 +80,25 @@
 	<center>
 <h1> New Dish</h1>
 <form name="mainMenuForm" id="mainMenuform" method="post" action="">
-	<table border="1" width="50%">
+	<table border="1" width="50%" style="border: 0px solid">
 		<tr>
-			<td class="headerTR">Dish Name</td>
-			<td align="center"><input type="text" name="subName" id="subName" value="<%=subName%>" style="width: 98%; height: 100%"> </td>
+			<th class="headerTR">Dish Name</th>
+			<td align="center"><input class="fullRowElement" type="text" name="subName" id="subName" value="<%=subName%>"> </td>
 		</tr>
 		<tr>
-			<td class="headerTR">Description</td>
+			<th class="headerTR">Description</th>
 			<td><textarea rows="4" cols="" name="description" id="description" style="width: 98%;"><%=descritpion %></textarea> </td>
 		</tr>
 		<tr>
-			<td class="headerTR">Ac Unit Price</td>
-			<td><input type="text" name="acUnitPrice" id="acUnitPrice" value="<%=acUnitPrice %>" onchange="validateFloatKeyPress(this)"/> </td>
+			<th class="headerTR">Ac Unit Price</th>
+			<td><input class="fullRowElement" type="text" name="acUnitPrice" id="acUnitPrice" value="<%=acUnitPrice %>" onchange="validateFloatKeyPress(this)"/> </td>
 		</tr>
 		<tr>
-			<td class="headerTR">Non Ac UnitPrice</td>
-			<td><input type="text" name="nonAcUnitPrice" id="nonAcUnitPrice" value="<%=nonAcUnitPrice %>" onchange="validateFloatKeyPress(this)"/> </td>
+			<th class="headerTR">Non Ac UnitPrice</th>
+			<td><input class="fullRowElement" type="text" name="nonAcUnitPrice" id="nonAcUnitPrice" value="<%=nonAcUnitPrice %>" onchange="validateFloatKeyPress(this)"/> </td>
 		</tr>
 		<tr>
-			<td class="headerTR">Food Type</td>
+			<th class="headerTR">Food Type</th>
 			<td>
 			<%if(foodType){
 				%>
@@ -118,7 +118,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="headerTR">Active</td>
+			<th class="headerTR">Active</th>
 			<td>
 			<%String activeSelected = "";
 				
@@ -127,10 +127,10 @@
 			}
 				
 			%>
-			<input type="checkbox" value="true" name="active" id="active" <%=activeSelected %>></td>
+			<input class="fullRowElement" style="width: 10%" type="checkbox" value="true" name="active" id="active" <%=activeSelected %>></td>
 		</tr>
 		<tr>
-			<td colspan="2" align="center"><input type="submit" name="page1" value="<%=submitText %>" class="btn btn-main btn-2g" onclick="return validateSubMenuForm()"></td>
+			<th colspan="2" align="center"><input type="submit" name="page1" value="<%=submitText %>" class="btn btn-main btn-2g" onclick="return validateSubMenuForm()"></th>
 		</tr>
 	</table>
 	<input type="hidden" name="mainMenuId" id="menuMapperId" value="<%=subMenuId%>">

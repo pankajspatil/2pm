@@ -17,7 +17,7 @@ List<ExpenseModel> expenseList = expense.getExpenseList(null, false);
 %>
 
 <h1 align="center">Add Expense</h1>
-<div style="float: right;padding-right: 11%">
+<div style="float: right;padding-right: 11%; padding-bottom: 0.3%">
 	<!-- <input type="button" name="newExpense" id="newExpense" value=""> -->
 	<button class="btn btn-main btn-2g" name="newExpense" id="newExpense" onclick="openExpenseFancyBox(0, 'newExpense', this);">New Expense</button>
 </div>
