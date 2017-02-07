@@ -54,7 +54,7 @@ $(document).ready(function() {
 	    });
 	   
 	   $('img[name=editVendor]').click(function(e){
-		   updateMenuRecord(this);
+		   updateVendorRecord(this);
 		});
 });
 

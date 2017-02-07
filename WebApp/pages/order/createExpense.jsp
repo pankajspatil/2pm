@@ -24,7 +24,7 @@
 	<%
 	Master masters = new Master();
 	
-	List<Vendor> vendorList = masters.getAllVendors(true);
+	List<Vendor> vendorList = masters.getAllVendors(true,0);
 	List<ExpenseItem> itemList = masters.getAllExpenseItems(true);
 	
 		Integer userId = Integer.parseInt(session.getAttribute(Constants.USER_ID).toString());

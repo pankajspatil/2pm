@@ -53,34 +53,33 @@ if(returnValue != 1){
 %>
 <form method="post" name="changePasswordForm" id="changePasswordForm">
 <h1 align="center">Change Password</h1>
-<table align="center">
+<table align="center" border="1" style="border: 0px solid;" width="40%">
 <%if(redirectPage.equals("")){
 	%><tr>
-		<td><b>Enter Current Password : </b></td>
+		<th class="headerTR">Current Password</th>
 		<td>
-			<input type="password" name="currentPassword" id="currentPassword" value="">
+			<input class="fullRowElement" type="password" name="currentPassword" id="currentPassword" value="">
 		</td>
 	</tr><%
 }%>
 	
 	<tr>
-		<td><b>Enter New Password : </b></td>
+		<th class="headerTR">New Password</th>
 		<td>
-			<input type="password" name="newPassword" id="newPassword" value="">
+			<input class="fullRowElement" type="password" name="newPassword" id="newPassword" value="">
 		</td>
 	</tr>
 	<tr>
-		<td><b>Re-Enter Current Password : </b></td>
+		<th class="headerTR">Re-Enter Password</th>
 		<td>
-			<input type="password" name="reEnterPassword" id="reEnterPassword" value="">
+			<input class="fullRowElement" type="password" name="reEnterPassword" id="reEnterPassword" value="">
 		</td>
 	</tr>
 	<tr><td colspan="2">&nbsp;</td></tr>
 	<tr>
 		<td colspan="2" align="center">
 			<input type="submit"
-			value="Update" class="wrapper-dropdown"
-			style="background-color: #2d97af; color: white;" name="page1" id="changePasswordbutton">
+			value="Update" class="btn btn-main btn-2g" name="page1" id="changePasswordbutton">
 		</td>
 	</tr>
 </table>

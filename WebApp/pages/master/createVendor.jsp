@@ -107,7 +107,7 @@ if(page1.equals("") && vendorId != 0){
 			
 				
 			%>
-			<input type="checkbox" value="true" name="active" id="active" <%=activeSelected %>></td>
+			<input class="fullRowElement" style="width: 10%" type="checkbox" value="true" name="active" id="active" <%=activeSelected %>></td>
 		</tr>
 		<tr>
 			<th colspan="2" align="center"><input type="submit" name="page1" value="<%=submitText %>" class="btn btn-main btn-2g" onclick="return validateVendorForm()"></th>
