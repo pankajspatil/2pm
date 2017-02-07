@@ -1,3 +1,5 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.LinkedHashMap"%>
 <%@page import="com.org.twopm.reports.Reports"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -16,6 +18,13 @@ String toDate = Utils.getString(request.getParameter("toDate"));
 String reportType = Utils.getString(request.getParameter("reportType"));
 
 String page1 = Utils.getString(request.getParameter("page1"));
+if (fromDate.equals("") && page1.equals("")){
+	 String pattern = "yyyy-MM-dd"; 
+	 SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern); 
+	 String date = simpleDateFormat.format(new Date());
+	 fromDate = date;
+	 toDate = date;
+	}
 %>
 
 <h2 align="center">Order Status Report</h2>

@@ -45,7 +45,7 @@
 <div style="float: right; margin-right: 1%;">
 	Add : 
 	<button class="btn btn-main btn-2g" name="mainMenuBtn" id="mainMenuBtn" onclick="openMenuFancyBox(0, 'mainMenu', this);">Main Menu</button>
-	<button class="btn btn-main btn-2g" name="subMenuBtn" id="subMenuBtn">Sub Menu</button>&nbsp;&nbsp;
+	<button class="btn btn-main btn-2g" name="subMenuBtn" id="subMenuBtn" onclick="openMenuFancyBox(0, 'subMenu', this);">Sub Menu</button>&nbsp;&nbsp;
 </div><br/><br/><br/>
 	<div id="foodMenu-container" class="tab-container">
 		<ul class='etabs'>

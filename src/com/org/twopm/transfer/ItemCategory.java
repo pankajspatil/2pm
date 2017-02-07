@@ -6,11 +6,17 @@ public class ItemCategory {
 	
 	private String itemCategoryName;
 	
+	private String itemCategoryDescription;
+	
 	private String itemCategoryType;
 	
 	private String itemCatTypeFormatted;
 	
 	private Boolean isActive;
+	
+	private Integer createdBy;
+	
+	private String createdOn;
 
 	public Integer getItemCategoryId() {
 		return itemCategoryId;
@@ -52,13 +58,39 @@ public class ItemCategory {
 		this.isActive = isActive;
 	}
 
+	public Integer getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(Integer createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public String getCreatedOn() {
+		return createdOn;
+	}
+
+	public void setCreatedOn(String createdOn) {
+		this.createdOn = createdOn;
+	}
+
+	public String getItemCategoryDescription() {
+		return itemCategoryDescription;
+	}
+
+	public void setItemCategoryDescription(String itemCategoryDescription) {
+		this.itemCategoryDescription = itemCategoryDescription;
+	}
+
 	@Override
 	public String toString() {
 		return "ItemCategory [itemCategoryId=" + itemCategoryId
 				+ ", itemCategoryName=" + itemCategoryName
+				+ ", itemCategoryDescription=" + itemCategoryDescription
 				+ ", itemCategoryType=" + itemCategoryType
 				+ ", itemCatTypeFormatted=" + itemCatTypeFormatted
-				+ ", isActive=" + isActive + "]";
+				+ ", isActive=" + isActive + ", createdBy=" + createdBy
+				+ ", createdOn=" + createdOn + "]";
 	}
 	
 }

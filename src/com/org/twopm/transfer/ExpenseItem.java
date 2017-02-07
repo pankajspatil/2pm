@@ -6,9 +6,15 @@ public class ExpenseItem {
 	
 	private String expenseItemName;
 	
+	private String expenseItemDescription;
+	
 	private ItemCategory itemCategory;
 	
 	private Boolean isActive;
+	
+	private Integer createdBy;
+	
+	private String createdOn;
 
 	public Integer getExpenseItemId() {
 		return expenseItemId;
@@ -42,10 +48,36 @@ public class ExpenseItem {
 		this.isActive = isActive;
 	}
 
+	public Integer getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(Integer createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public String getCreatedOn() {
+		return createdOn;
+	}
+
+	public void setCreatedOn(String createdOn) {
+		this.createdOn = createdOn;
+	}
+
+	public String getExpenseItemDescription() {
+		return expenseItemDescription;
+	}
+
+	public void setExpenseItemDescription(String expenseItemDescription) {
+		this.expenseItemDescription = expenseItemDescription;
+	}
+
 	@Override
 	public String toString() {
-		return "expenseItem [expenseItemId=" + expenseItemId
-				+ ", expenseItemName=" + expenseItemName + ", itemCategory="
-				+ itemCategory + ", isActive=" + isActive + "]";
+		return "ExpenseItem [expenseItemId=" + expenseItemId
+				+ ", expenseItemName=" + expenseItemName
+				+ ", expenseItemDescription=" + expenseItemDescription
+				+ ", itemCategory=" + itemCategory + ", isActive=" + isActive
+				+ ", createdBy=" + createdBy + ", createdOn=" + createdOn + "]";
 	}
 }

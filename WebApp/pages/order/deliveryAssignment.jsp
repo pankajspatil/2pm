@@ -65,6 +65,8 @@ if(trackersList.size() > 0){
 					String selected = "";
 					for(User deliveryPerson : deliveryPersonList){
 					
+					selected = "";
+						
 					personName = deliveryPerson.getFirstName() + " ";
 					personName += deliveryPerson.getMiddleName() + " ";
 					personName += deliveryPerson.getLastName();

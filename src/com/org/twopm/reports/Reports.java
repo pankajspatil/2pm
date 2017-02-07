@@ -89,7 +89,7 @@ public LinkedHashMap<String, String> getRevenueData(String fromDate, String toDa
 		ConnectionsUtil connectionsUtil = new ConnectionsUtil();
 		Connection conn = connectionsUtil.getConnection();
 		
-		String query = "select * from status_master where is_active = 1 and status_code not in('COOKING') order by status_id desc";
+		String query = "select * from status_master where is_active = 1 and status_code not in('COOKING', 'INDELIVERY', 'DELIVERED') order by status_id desc";
 		ResultSet dataRS = conn.createStatement().executeQuery(query);
 		while(dataRS.next()){
 			statusMap.put(dataRS.getString("status_id"), dataRS.getString("status_name"));
