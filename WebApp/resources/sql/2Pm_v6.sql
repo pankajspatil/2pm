@@ -1,4 +1,4 @@
-TRUNCATE `two_pm`.`order_menu_map`;
+delete from  `two_pm`.`order_menu_map`;
 delete from `two_pm`.`main_sub_menu_map`;
 delete FROM two_pm.main_menu_master;
 delete FROM two_pm.sub_menu_master;
@@ -13,8 +13,8 @@ ALTER TABLE `two_pm`.`main_menu_master`
 AUTO_INCREMENT = 1 ;
 
 
-INSERT INTO `agri_tadka`.`main_menu_master` (`menu_name`, `is_veg`, `created_by`) VALUES('BASMATI KA KHAZANA (NON VEG)',0,1);
-INSERT INTO `agri_tadka`.`main_menu_master` (`menu_name`, `is_veg`, `created_by`) VALUES('BASMATI KA KHAZANA ( VEG)',1,1);
+INSERT INTO `two_pm`.`main_menu_master` (`menu_name`, `is_veg`, `created_by`) VALUES('BASMATI KA KHAZANA (NON VEG)',0,1);
+INSERT INTO `two_pm`.`main_menu_master` (`menu_name`, `is_veg`, `created_by`) VALUES('BASMATI KA KHAZANA ( VEG)',1,1);
 INSERT INTO `agri_tadka`.`main_menu_master` (`menu_name`, `is_veg`, `created_by`) VALUES('BREAD SECTION',1,1);
 INSERT INTO `agri_tadka`.`main_menu_master` (`menu_name`, `is_veg`, `created_by`) VALUES('DESSERTS',1,1);
 INSERT INTO `agri_tadka`.`main_menu_master` (`menu_name`, `is_veg`, `created_by`) VALUES('EGG',0,1);
