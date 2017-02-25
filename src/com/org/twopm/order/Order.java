@@ -105,6 +105,9 @@ public class Order {
 	
 	public String saveOrder(String data, String userId) throws SQLException{
 		
+		boolean isSystemCookable = false;
+		String status = "";
+		
 		ConnectionsUtil connectionsUtil = new ConnectionsUtil();
 		Connection conn = connectionsUtil.getConnection();
 		
@@ -163,8 +166,17 @@ public class Order {
 			}
 		}
 		
-		String query = "insert into order_menu_map(order_id, main_sub_menu_map_id, quantity, unit_price, status_id, notes, created_by, order_price)" +
-				   "values(?,?,?,?, (select status_id from status_master where status_code = 'INQUEUE'),?,?,?)";
+		if (isSystemCookable){
+			status ="INQUEUE";
+		}else{
+			status="COMPLETED";			
+			// Additional check at dish level need to be added
+		}
+		
+		String query = "insert into order_menu_map(order_id, main_sub_menu_map_id, quantity, unit_price, "
+				+ "status_id, notes, created_by, order_price)" 
+				+ "values(?,?,?,?, (select status_id from status_master where status_code = "
+				   + "'"+status+"'),?,?,?)";
 	
 		String query1 = "update order_menu_map set quantity = ?, order_price = ?, notes = ? where order_menu_map_id = ? ";
 
@@ -358,7 +370,7 @@ public class Order {
 				"left join main_sub_menu_map msm on msm.main_sub_menu_map_id = om.main_sub_menu_map_id "+
 				"left join main_menu_master mm on mm.main_menu_id = msm.main_menu_id "+
 				"left join sub_menu_master sm on msm.sub_menu_id = sm.sub_menu_id group by om.main_sub_menu_map_id";
-		System.out.println("query==>" + query);
+		//System.out.println("query==>" + query);
 		
 		dataRS = conn.createStatement().executeQuery(query);
 		
@@ -567,14 +579,25 @@ public class Order {
 		ConnectionsUtil connectionsUtil = new ConnectionsUtil();
 		Connection conn = connectionsUtil.getConnection();
 
+		boolean isSystemCookable = false;
+		String status = "";
+		
 		Integer returnVal = 0;
 
 		JsonObject jsonObject = Utils.getJSONObjectFromString(data);
 
 		Integer orderMenuMapId = jsonObject.get("orderMenuMapId").getAsInt();
 
+		if (isSystemCookable){
+			status ="INQUEUE";
+			// Additional check at dish level need to be added
+		}else{
+			status="COMPLETED";
+		}
+		
+		
 		String query = "select * from order_menu_map om "
-				+ "inner join status_master s on om.status_id = s.status_id and status_code not in('INQUEUE') "
+				+ "inner join status_master s on om.status_id = s.status_id and status_code not in('"+status+"') "
 				+ "and om.order_menu_map_id = ?";
 
 		PreparedStatement psmt = conn.prepareStatement(query);
@@ -605,6 +628,9 @@ public class Order {
 
 		Integer returnVal = 0;
 		
+		boolean isSystemCookable = false;
+		String status = "";
+		
 		/*
 		 * JsonParser jsonParser = new JsonParser(); JsonObject jsonObject =
 		 * (JsonObject)jsonParser.parse(data);
@@ -613,9 +639,17 @@ public class Order {
 		JsonObject jsonObject = Utils.getJSONObjectFromString(data);
 
 		Integer orderId = jsonObject.get("orderId").getAsInt();
+		
+		if (isSystemCookable){
+			status ="INQUEUE";
+			
+			// Additional check at dish level need to be added
+		}else{
+			status="COMPLETED";
+		}
 
 		String query = "select * from order_menu_map om "
-				+ "inner join status_master s on om.status_id = s.status_id and status_code not in ('INQUEUE') "
+				+ "inner join status_master s on om.status_id = s.status_id and status_code not in ('"+status+"') "
 				+ "and om.order_id = ?";
 
 		PreparedStatement psmt = conn.prepareStatement(query);
