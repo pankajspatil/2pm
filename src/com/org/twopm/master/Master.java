@@ -100,6 +100,7 @@ public SubMenu getSubMenu(Integer subMenuId) throws SQLException{
 			subMenu.setVeg(dataRS.getBoolean("is_veg"));
 			subMenu.setMenuDescription(Utils.getString(dataRS.getString("menu_description")));
 			subMenu.setActive(dataRS.getBoolean("is_active"));
+			subMenu.setCookable(dataRS.getBoolean("is_cookable"));
 			
 		}
 		
@@ -138,7 +139,7 @@ public SubMenu insertSubMenu(SubMenu subMenu, String userId) throws SQLException
 		ConnectionsUtil connectionsUtil = new ConnectionsUtil();
 		Connection conn = connectionsUtil.getConnection();
 		
-		String query = "insert into sub_menu_master(menu_name, menu_description, is_veg,non_ac_unit_price,ac_unit_price, is_active, created_by) values(?,?,?,?,?,?,?)";
+		String query = "insert into sub_menu_master(menu_name, menu_description, is_veg,non_ac_unit_price,ac_unit_price, is_active,is_cookable, created_by) values(?,?,?,?,?,?,?,?)";
 		
 		PreparedStatement psmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 		
@@ -149,7 +150,8 @@ public SubMenu insertSubMenu(SubMenu subMenu, String userId) throws SQLException
 		psmt.setFloat(4, subMenu.getNonAcUnitPrice());
 		psmt.setFloat(5,subMenu.getAcUnitPrice());
 		psmt.setBoolean(6, subMenu.isActive());
-		psmt.setString(7, userId);
+		psmt.setBoolean(7, subMenu.isCookable());
+		psmt.setString(8, userId);
 		
 		psmt.executeUpdate();
 		
@@ -190,7 +192,7 @@ public SubMenu updateSubMenu(SubMenu subMenu, String userId) throws SQLException
 		ConnectionsUtil connectionsUtil = new ConnectionsUtil();
 		Connection conn = connectionsUtil.getConnection();
 		
-		String query = "update sub_menu_master set menu_name = ?, menu_description = ?, is_veg =  ?,non_ac_unit_price=?,ac_unit_price=?, is_active = ?, created_by = ? where sub_menu_id = ?";
+		String query = "update sub_menu_master set menu_name = ?, menu_description = ?, is_veg =  ?,non_ac_unit_price=?,ac_unit_price=?, is_active = ?, is_cookable=?, created_by = ? where sub_menu_id = ?";
 		
 		PreparedStatement psmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 		
@@ -201,8 +203,9 @@ public SubMenu updateSubMenu(SubMenu subMenu, String userId) throws SQLException
 		psmt.setFloat(4, subMenu.getNonAcUnitPrice());
 		psmt.setFloat(5, subMenu.getAcUnitPrice());
 		psmt.setBoolean(6, subMenu.isActive());
-		psmt.setString(7, userId);
-		psmt.setInt(8, subMenu.getSubMenuId());
+		psmt.setBoolean(7, subMenu.isCookable());
+		psmt.setString(8, userId);
+		psmt.setInt(9, subMenu.getSubMenuId());
 		
 		psmt.executeUpdate();
 		connectionsUtil.closeConnection(conn);
@@ -233,6 +236,7 @@ public List<SubMenu> getAllSubMenus(boolean onlyActive) throws SQLException{
 			subMenu.setSubMenuName(dataRS.getString("menu_name"));
 			subMenu.setVeg(dataRS.getBoolean("is_veg"));
 			subMenu.setMenuDescription(Utils.getString(dataRS.getString("menu_description")));
+			subMenu.setCookable(dataRS.getBoolean("is_cookable"));
 			subMenu.setActive(dataRS.getBoolean("is_active"));
 			subMenu.setAcUnitPrice(dataRS.getFloat("ac_unit_price"));
 			subMenu.setNonAcUnitPrice(dataRS.getFloat("non_ac_unit_price"));
@@ -249,7 +253,7 @@ public List<MenuMapper> getMenuMappings(boolean onlyActive) throws SQLException{
 		Connection conn = connectionsUtil.getConnection();
 		
 		String query = "SELECT ms.main_sub_menu_map_id, m.main_menu_id, s.sub_menu_id, s.menu_description, " +
-				"m.menu_name as main_menu, s.menu_name as sub_menu, s.ac_unit_price, s.non_ac_unit_price, s.is_veg, s.is_active "+
+				"m.menu_name as main_menu, s.menu_name as sub_menu, s.ac_unit_price, s.non_ac_unit_price, s.is_veg, s.is_active,s.is_cookable "+
 				"FROM main_sub_menu_map ms "+
 				"inner join main_menu_master m on m.main_menu_id = ms.main_menu_id and ms.is_active = 1 and m.is_active = 1 "+
 				"inner join sub_menu_master s on s.sub_menu_id = ms.sub_menu_id ";
@@ -279,6 +283,7 @@ public List<MenuMapper> getMenuMappings(boolean onlyActive) throws SQLException{
 			subMenu.setMenuDescription(Utils.getString(dataRS.getString("menu_description")));
 			subMenu.setActive(dataRS.getBoolean("is_active"));
 			subMenu.setAcUnitPrice(dataRS.getFloat("ac_unit_price"));
+			subMenu.setCookable(dataRS.getBoolean("is_cookable"));
 			subMenu.setNonAcUnitPrice(dataRS.getFloat("non_ac_unit_price"));
 			
 			menuMapper.setMainMenu(mainMenu);
@@ -297,7 +302,7 @@ public List<MenuMapper> getAllSubMenus1(boolean onlyActive) throws SQLException{
 	Connection conn = connectionsUtil.getConnection();
 	
 	String query = "SELECT ms.main_sub_menu_map_id, m.main_menu_id, s.sub_menu_id, s.menu_description, " +
-			"m.menu_name as main_menu, s.menu_name as sub_menu, s.ac_unit_price, s.non_ac_unit_price, s.is_veg, s.is_active "+
+			"m.menu_name as main_menu, s.menu_name as sub_menu, s.ac_unit_price, s.non_ac_unit_price, s.is_veg, s.is_active,s.is_cookable "+
 			"FROM main_sub_menu_map ms "+
 			"inner join main_menu_master m on m.main_menu_id = ms.main_menu_id and ms.is_active = 1 and m.is_active = 1 "+
 			"inner join sub_menu_master s on s.sub_menu_id = ms.sub_menu_id ";
@@ -326,6 +331,7 @@ public List<MenuMapper> getAllSubMenus1(boolean onlyActive) throws SQLException{
 		subMenu.setVeg(dataRS.getBoolean("is_veg"));
 		subMenu.setMenuDescription(Utils.getString(dataRS.getString("menu_description")));
 		subMenu.setActive(dataRS.getBoolean("is_active"));
+		subMenu.setCookable(dataRS.getBoolean("is_cookable"));
 		subMenu.setAcUnitPrice(dataRS.getFloat("ac_unit_price"));
 		subMenu.setNonAcUnitPrice(dataRS.getFloat("non_ac_unit_price"));
 		
@@ -426,7 +432,7 @@ public LinkedHashMap<MainMenu, List<MenuMapper>> getMenus(String priceType) thro
 	Connection conn = connectionsUtil.getConnection();
 	
 	String query = "SELECT ms.main_sub_menu_map_id, m.main_menu_id, s.sub_menu_id, " +
-					"m.menu_name as main_menu, s.menu_name as sub_menu, s."+ priceType +"_unit_price as unit_price, s.is_veg "+
+					"m.menu_name as main_menu, s.menu_name as sub_menu, s."+ priceType +"_unit_price as unit_price, s.is_veg , s.is_cookable "+
 					"FROM main_menu_master m "+
 					"inner join (select * from main_menu_master mm where is_active = 1) mm on m.main_menu_id = mm.main_menu_id "+
 					"left join main_sub_menu_map ms on m.main_menu_id = ms.main_menu_id and ms.is_active = 1 "+
@@ -469,6 +475,8 @@ public LinkedHashMap<MainMenu, List<MenuMapper>> getMenus(String priceType) thro
 		subMenuObj.setSubMenuName(subMenuName);
 		subMenuObj.setUnitPrice(unitPrice);
 		subMenuObj.setVeg(dataRS.getBoolean("is_veg"));
+		subMenuObj.setCookable(dataRS.getBoolean("is_cookable"));
+		
 		
 		menuMapper = new MenuMapper();
 		menuMapper.setMainMenu(mainMenuObj);

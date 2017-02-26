@@ -96,6 +96,7 @@
 						<td width="10%">Veg/Non Veg</td>
 						<td width="10%">AC</td>
 						<td width="10%">Non AC</td>
+						<td width="5%">Cookable</td>
 						<td width="5%">Active</td>
 						<td width="10%">Action</td>
 					</tr>
@@ -110,7 +111,8 @@
 								<td align="center"><%=subMenu.isVeg() ? "Veg" : "Non Veg" %></td>
 								<td align="center"><%=subMenu.getAcUnitPrice() %></td>
 								<td align="center"><%=subMenu.getNonAcUnitPrice() %></td>
-								<td align="center"><%=subMenu.isActive() ? "True" : "False" %></td>
+								<td align="center"><%=subMenu.isCookable() ? "True" : "False" %></td>
+								<td align="center"><%=subMenu.isActive() ? "True" : "False" %></td>								
 								<td>
 									<img style="margin-left: 40%" height="22%" src="<%=contextPath%>/resources/images/edit.png" 
 									id="subMenu_<%=subMenu.getSubMenuId()%>" name="editMenu" onclick="updateMenuRecord(this)">

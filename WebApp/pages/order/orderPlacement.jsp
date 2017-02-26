@@ -121,7 +121,7 @@ List<Waiter> waiterList = order.getWaiterList();
 						<%if(mappers.size() > 0){
 							%><table width="100%" border="0">
 							<%for(MenuMapper mapper : mappers){ %>
-								<tr id="<%=mapper.getMainSubMenuId()%>" align="center">
+								<tr id="<%=mapper.getMainSubMenuId()%>" align="center" cookable="<%=mapper.getSubMenu().isCookable() %>">
 									<td width="80%" align="left" style="">
 									<%if(mapper.getSubMenu().isVeg()){
 										%><img width="2%" height="1%" alt="Veg" src="<%=contextPath%>/resources/images/veg-icon.png"> <%
@@ -174,9 +174,9 @@ List<Waiter> waiterList = order.getWaiterList();
 				<%if(orderData.getSelectedMenus() != null && orderData.getSelectedMenus().size() > 0){
 					for(OrderMenu orderMenu : orderData.getSelectedMenus()){
 					%>
-					<tr align="center">
+					<tr align="center" >
 						<td align="left">
-							<input type="hidden" id="<%=orderMenu.getOrderMenuMapId()%>">
+							<input type="hidden" id="<%=orderMenu.getOrderMenuMapId()%>" >
 							<%if(orderMenu.isVeg()){
 										%><img width="2%" height="1%" alt="Veg" src="<%=contextPath%>/resources/images/veg-icon.png"> <%
 									}else{

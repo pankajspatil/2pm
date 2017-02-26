@@ -9,6 +9,8 @@ function addMenuToOrder(buttonObj){
 	var clonedRow = menuRow.clone(true);
 	
 	var menuId = menuRow.attr('id');
+	var cookable=menuRow.attr('cookable');
+	alert("cookable" +cookable);
 	var quantity = 1;
 	var unitPrice = $(menuRow).find('td:nth-child(3)').text();
 	if (unitPrice.trim() == ''){
@@ -30,6 +32,7 @@ function addMenuToOrder(buttonObj){
 	
 	var menu = {};
 	menu.menuId = menuId;
+	menu.cookable = cookable;
 	menu.quantity = quantity;
 	menu.unitPrice = unitPrice;
 	menu.finalPrice = finalPrice;

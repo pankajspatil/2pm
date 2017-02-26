@@ -21,7 +21,7 @@
 	Float nonAcUnitPrice,acUnitPrice;
 	SubMenu subMenu = null;
 	String subName = "", descritpion = "";
-	Boolean foodType, active;
+	Boolean foodType, active,cookable;
 	String submitText = subMenuId == 0 ? "ADD" : "UPDATE";
 
 	if(page1.equals("") && subMenuId != 0){
@@ -30,6 +30,7 @@
 		subName = Utils.getString(subMenu.getSubMenuName());
 		descritpion = Utils.getString(subMenu.getMenuDescription());
 		foodType = subMenu.isVeg();
+		cookable=subMenu.isCookable();
 		active = subMenu.isActive();
 		acUnitPrice=subMenu.getAcUnitPrice();
 		nonAcUnitPrice=subMenu.getNonAcUnitPrice();
@@ -41,7 +42,7 @@
 		descritpion = Utils.getString(request.getParameter("description"));
 		foodType = Boolean.parseBoolean(Utils.getString(request.getParameter("foodType")));
 		active = Boolean.parseBoolean(Utils.getString(request.getParameter("active")).toString());
-		
+		cookable = Boolean.parseBoolean(Utils.getString(request.getParameter("cookable")).toString());
 		//System.out.print("foodType " +Utils.getString(request.getParameter("foodType")));
 		//System.out.print("active " +request.getParameter("active"));
 		
@@ -55,6 +56,7 @@
 		subMenu.setAcUnitPrice(acUnitPrice);
 		subMenu.setNonAcUnitPrice(nonAcUnitPrice);
 		subMenu.setActive(active);
+		subMenu.setCookable(cookable);
 		subMenu.setSubMenuId(subMenuId); 
 		
 		if(page1.equals("ADD")){
@@ -118,9 +120,21 @@
 			</td>
 		</tr>
 		<tr>
-			<th class="headerTR">Active</th>
+			<th class="headerTR">Cookable</th>
 			<td>
 			<%String activeSelected = "";
+				
+			if(cookable){
+				activeSelected = "checked=checked";
+			}
+				
+			%>
+			<input class="fullRowElement" style="width: 10%" type="checkbox" value="true" name="cookable" id="cookable" <%=activeSelected %>></td>
+		</tr>
+		<tr>
+			<th class="headerTR">Active</th>
+			<td>
+			<% activeSelected = "";
 				
 			if(active){
 				activeSelected = "checked=checked";

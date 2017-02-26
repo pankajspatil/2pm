@@ -17,6 +17,8 @@ public class SubMenu {
 	private boolean isActive;
 	
 	private Float unitPrice;
+	
+	private boolean isCookable; 
 
 	public Integer getSubMenuId() {
 		return subMenuId;
@@ -78,6 +80,14 @@ public class SubMenu {
 		return isActive;
 	}
 
+	public boolean isCookable() {
+		return isCookable;
+	}
+
+	public void setCookable(boolean isCookable) {
+		this.isCookable = isCookable;
+	}
+
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
@@ -88,6 +98,6 @@ public class SubMenu {
 				+ subMenuName + ", menuDescription=" + menuDescription
 				+ ", acUnitPrice=" + acUnitPrice + ", nonAcUnitPrice="
 				+ nonAcUnitPrice + ", isVeg=" + isVeg + ", isActive="
-				+ isActive + ", unitPrice=" + unitPrice + "]";
+				+ isActive + ", unitPrice=" + unitPrice + ", Cookable=" + isCookable + "]";
 	}
 }
