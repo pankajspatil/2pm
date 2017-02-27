@@ -27,7 +27,7 @@ try{
 	Integer returnValue = new Integer(0);
 	
 	if(action.equals("saveOrder")){
-		String returnStr = order.saveOrder(data, userId);
+		String returnStr = order.saveOrder(data,userId);
 		out.println(returnStr);
 	}else if(action.equals("fetchCookingData")){
 		List<Cooking> returnList = order.getOrderedMenus(data);

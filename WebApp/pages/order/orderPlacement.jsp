@@ -176,7 +176,7 @@ List<Waiter> waiterList = order.getWaiterList();
 					%>
 					<tr align="center" >
 						<td align="left">
-							<input type="hidden" id="<%=orderMenu.getOrderMenuMapId()%>" >
+							<input type="hidden" id="<%=orderMenu.getOrderMenuMapId()%>" cookable="<%=orderMenu.isCookable() %>">
 							<%if(orderMenu.isVeg()){
 										%><img width="2%" height="1%" alt="Veg" src="<%=contextPath%>/resources/images/veg-icon.png"> <%
 									}else{

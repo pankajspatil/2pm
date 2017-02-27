@@ -266,7 +266,7 @@ public class Order {
 		if(tableId != null || orderId != null){
 		
 		query = "select o.order_id,o.order_sequence, om.order_menu_map_id , msm.main_sub_menu_map_id, om.quantity, om.unit_price, "+
-						"om.order_price, sm.menu_name, om.notes, s.status_code, o.waiter_id, "+ 
+						"om.order_price, sm.menu_name, om.notes, sm.is_cookable,s.status_code, o.waiter_id, "+ 
 						"o.customer_name, o.mobile_number, o.customer_address, o.tax, o.advance_amt, o.discount_amt "+
 						"from order_master o inner join status_master s on o.status_id = s.status_id ";
 		
@@ -310,6 +310,7 @@ public class Order {
 				orderMenu.setFinalPrice(dataRS.getFloat("order_price"));
 				orderMenu.setNotes(dataRS.getString("notes"));
 				orderMenu.setSubMenuName(dataRS.getString("menu_name"));
+				orderMenu.setCookable(dataRS.getBoolean("is_cookable"));
 				
 				orderMenus.add(orderMenu);
 				orderData.setSelectedMenus(orderMenus);
@@ -595,9 +596,13 @@ public class Order {
 
 		if (isSystemCookable){
 			status ="INQUEUE";
-			// Additional check at dish level need to be added
 		}else{
-			status="COMPLETED";
+			
+			if(jsonObject.get("cookable").getAsBoolean()){
+				status ="COMPLETED";
+			}else{
+				status="INQUEUE";	
+			}								
 		}
 		
 		
@@ -645,14 +650,9 @@ public class Order {
 
 		Integer orderId = jsonObject.get("orderId").getAsInt();
 		
-		if (isSystemCookable){
-			status ="INQUEUE";
 			
-			// Additional check at dish level need to be added
-		}else{
-			status="COMPLETED";
-		}
-
+		status ="INQUEUE";
+		
 		String query = "select * from order_menu_map om "
 				+ "inner join status_master s on om.status_id = s.status_id and status_code not in ('"+status+"') "
 				+ "and om.order_id = ?";

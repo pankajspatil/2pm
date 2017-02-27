@@ -19,6 +19,8 @@ public class OrderMenu {
 	private String createdOn;
 	
 	private boolean isVeg;
+	
+	private boolean isCookable;
 
 	public Integer getOrderMenuMapId() {
 		return orderMenuMapId;
@@ -90,6 +92,14 @@ public class OrderMenu {
 
 	public void setVeg(boolean isVeg) {
 		this.isVeg = isVeg;
+	}
+
+	public boolean isCookable() {
+		return isCookable;
+	}
+
+	public void setCookable(boolean isCookable) {
+		this.isCookable = isCookable;
 	}
 
 	@Override

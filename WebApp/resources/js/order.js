@@ -478,7 +478,8 @@ function deleteRecord(imgObj,randomnumber){
             	
             	var rowObj = $(imgObj).closest('tr');
             	var id = $(rowObj).attr("id");	
-            	var orderMenuMapId = rowObj.find("input:hidden").attr("id");            	
+            	var orderMenuMapId = rowObj.find("input:hidden").attr("id");  
+            	var cookable = rowObj.find("input:hidden").attr("cookable");
             	
             	if(orderMenuMapId === undefined){
             		
@@ -515,7 +516,8 @@ function deleteRecord(imgObj,randomnumber){
             		
             	}else {
             		var data = {
-            				"orderMenuMapId" : orderMenuMapId
+            				"orderMenuMapId" : orderMenuMapId,
+            				"cookable" :cookable
             		};
             		
             		var postData = {
