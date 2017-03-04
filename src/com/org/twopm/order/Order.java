@@ -595,13 +595,13 @@ public class Order {
 		Integer orderMenuMapId = jsonObject.get("orderMenuMapId").getAsInt();
 
 		if (isSystemCookable){
-			status ="INQUEUE";
+			status ="'COOKING'";
 		}else{
 			
 			if(jsonObject.get("cookable").getAsBoolean()){
-				status ="COMPLETED";
+				status ="INQUEUE";
 			}else{
-				status="INQUEUE";	
+				status ="COOKING','COMPLETED";
 			}								
 		}
 		

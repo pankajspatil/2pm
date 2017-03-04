@@ -40,6 +40,8 @@ public class ConnectionsUtil {
 				Class.forName("com.mysql.jdbc.Driver");  
 				  
 				conn=DriverManager.getConnection(  
+				//"jdbc:mysql://localhost:3306/two_pm","root","vicidialnow");
+				//"jdbc:mysql://localhost:3306/agri_tadka","root","admin");
 				"jdbc:mysql://localhost:3306/two_pm","root","admin");
 			}
 

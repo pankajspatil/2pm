@@ -15,6 +15,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<title>Pankaj</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="<%=contextPath%>/resources/css/order.css" rel="stylesheet" type="text/css">
 <!-- <link href="<%=contextPath%>/resources/css/demo.css" rel="stylesheet" type="text/css"> -->
@@ -196,7 +197,7 @@ List<Waiter> waiterList = order.getWaiterList();
 						</td>
 						<td><%=orderMenu.getUnitPrice() %></td>
 						<td><%=orderMenu.getFinalPrice() %></td>
-						<td><img class="deleteIcon" src="<%=contextPath%>/resources/images/Delete.png" onclick="deleteRecord(this)"></td>						
+						<td><img class="deleteIcon" src="<%=contextPath%>/resources/images/Delete.png" onclick="deleteRecord(this,null,<%=orderMenu.isCookable() %>)" cookable="<%=orderMenu.isCookable() %>"></td>						
 					</tr>
 					<%
 					subTotal += orderMenu.getFinalPrice();

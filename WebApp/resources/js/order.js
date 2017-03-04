@@ -50,7 +50,7 @@ function addMenuToOrder(buttonObj){
 	
 	menuList[randomNumber] = menu;
 
-	var combo = $("<select onClick='setOldValue(this)' onChange='updatePrice(this)'></select>").attr("id", randomNumber).attr("name", randomNumber);
+	var combo = $("<select onClick='setOldValue(this)' onChange='updatePrice(this)'></select>").attr("id", randomNumber).attr("name", randomNumber).attr("cookable",menu.cookable);
 
     for(var i=1; i <= 30; i++){
     	combo.append("<option value='" + i + "'>" + i + "</option>");
@@ -62,14 +62,14 @@ function addMenuToOrder(buttonObj){
     var notesCell = $("<td></td>");
     notesCell.append(notes);
     
-    var newRow = $("<tr id='"+randomNumber+"' title='random' align='center'></tr>");    
+    var newRow = $("<tr id='"+randomNumber+"' title='random' align='center' cookable='"+cookable+"'></tr>");    
     newRow.append($(clonedRow).find('td:nth-child(1)').removeAttr('width').attr("align","left"));
     
     newRow.append(notesCell);
     newRow.append(quantityCell);
     newRow.append("<td>"+unitPrice+"</td>");
     newRow.append("<td>"+finalPrice+"</td>");
-    newRow.append($("<img class='deleteIcon' src='"+contextPath+"/resources/images/Delete.png' onclick='deleteRecord(this,"+randomNumber+")'>"));
+    newRow.append($("<img class='deleteIcon' src='"+contextPath+"/resources/images/Delete.png' onclick='deleteRecord(this,"+randomNumber+","+cookable+")' >"));
    
     //console.log(newRow);
 	
@@ -468,7 +468,7 @@ function setOldValue(selectObj){
 	oldSelectVal = $(selectObj).val();
 }
 
-function deleteRecord(imgObj,randomnumber){
+function deleteRecord(imgObj,randomnumber,cookable){
 	var lobibox = Lobibox.confirm({
 		msg: "Are you sure you want to delete this record?",
 		callback: function ($this, type) {
@@ -479,7 +479,7 @@ function deleteRecord(imgObj,randomnumber){
             	var rowObj = $(imgObj).closest('tr');
             	var id = $(rowObj).attr("id");	
             	var orderMenuMapId = rowObj.find("input:hidden").attr("id");  
-            	var cookable = rowObj.find("input:hidden").attr("cookable");
+            	//var cookable = rowObj.find("input:hidden").attr("cookable");
             	
             	if(orderMenuMapId === undefined){
             		
